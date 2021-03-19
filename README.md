@@ -2,9 +2,9 @@
 
 Application to monitor, manage and evaluate own stocks and share portfolios.
 
-## Development Stack
+## Development 
 
-- Laravel and Php 7.4
+- Laravel 7 and Php
 - Vue.JS 
 - VueChart.JS
 
