@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class StockController extends Controller
 {
-    use RelationComposer, DataComposer;
+    use RelationComposer;
+    use DataComposer;
 
     /**
      * StockController constructor.
