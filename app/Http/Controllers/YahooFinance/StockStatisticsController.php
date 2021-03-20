@@ -2,38 +2,36 @@
 
 namespace App\Http\Controllers\YahooFinance;
 
-use App\Data\YahooFinance;
 use App\Http\Controllers\Controller;
 use App\Models\Stock;
-use GuzzleHttp\Client;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
+use App\Services\YahooFinance\ConnectorInterface;
+use App\Transformers\StatisticsDataTransformer;
 
 class StockStatisticsController extends Controller
 {
     /**
-     * StockStatisticsController constructor.
+     * @var ConnectorInterface
      */
-    public function __construct()
+    protected $statistics;
+
+    /**
+     * StockStatisticsController constructor.
+     * @param ConnectorInterface $statistics
+     */
+    public function __construct(ConnectorInterface $statistics)
     {
         $this->middleware(['auth:sanctum']);
+        $this->statistics = $statistics;
     }
 
     public function statistics(string $stockId)
     {
         $stock = Stock::find($stockId);
-        $client = new Client();
 
-        $result = $client->get(
-            YahooFinance::API_BASE_URL . YahooFinance::STOCK_STATISTICS . $stock->ticker_symbol,
-            [
-                'headers' => [
-                    'x-rapidapi-host' => env(YahooFinance::API_HOST_ENV),
-                    'x-rapidapi-key' => env(YahooFinance::API_KEY_ENV)
-                ]
-            ]
-        );
+        $result = $this->statistics->callApi($stock);
 
-        return Response::json(json_decode($result->getBody()));
+        return fractal()
+            ->item($result)
+            ->transformWith(new StatisticsDataTransformer($stock));
     }
 }

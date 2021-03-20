@@ -7,22 +7,22 @@ use App\Models\Stock;
 use App\Http\Controllers\Controller;
 use App\Traits\RelationComposer;
 use App\Transformers\HistoricalDataTransformer;
-use App\Services\YahooFinance\RequestInterface;
-
+use App\Services\YahooFinance\ConnectorInterface;
 
 class StockHistoricalController extends Controller
 {
     use RelationComposer;
 
     /**
-     * @var RequestInterface
+     * @var ConnectorInterface
      */
     protected $historical;
 
     /**
      * StockHistoricalController constructor.
+     * @param ConnectorInterface $historical
      */
-    public function __construct(RequestInterface $historical)
+    public function __construct(ConnectorInterface $historical)
     {
         $this->middleware(['auth:sanctum']);
         $this->historical = $historical;

@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use App\Data\YahooFinance;
 use App\Models\Stock;
 
-class HistoricalRequest implements RequestInterface
+class HistoricalConnector implements ConnectorInterface
 {
     /**
      * @var Client
@@ -14,7 +14,7 @@ class HistoricalRequest implements RequestInterface
     protected $client;
 
     /**
-     * HistoricalRequest constructor.
+     * HistoricalConnector constructor.
      * @param $client
      */
     public function __construct(Client $client)
@@ -25,7 +25,7 @@ class HistoricalRequest implements RequestInterface
     public function callApi(Stock $stock)
     {
         $result = $this->client->get(
-            YahooFinance::API_BASE_URL.YahooFinance::STOCK_HISTORICAL.$stock->ticker_symbol,
+            YahooFinance::API_BASE_URL . YahooFinance::STOCK_HISTORICAL . $stock->ticker_symbol,
             [
                 'headers' => [
                     'x-rapidapi-host' => env(YahooFinance::API_HOST_ENV),

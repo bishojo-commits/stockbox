@@ -18,7 +18,8 @@ class StockTest extends TestCase
 
         $stock = factory(Stock::class)->create();
 
-        $stock->depots()->attach($depot,
+        $stock->depots()->attach(
+            $depot,
             [
                 'buy_price' => 6.77,
                 'buy_date' => Carbon::createFromFormat('m/d/Y', '05/20/2020')->format('Y-m-d'),

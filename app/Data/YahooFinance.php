@@ -22,7 +22,7 @@ class YahooFinance
     public const STOCK_SUMMARY = '/stock/v2/get-summary?region=US&symbol=';
 
     /**
-     * Statisticks
+     * Statistics
      */
     public const STOCK_STATISTICS = '/stock/v2/get-statistics?region=US&symbol=';
 

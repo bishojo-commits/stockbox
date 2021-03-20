@@ -11,7 +11,8 @@ use Tests\TestCase;
 
 class StockControllerUpdateTest extends TestCase
 {
-    use DateFormatter, WithFaker;
+    use DateFormatter;
+    use WithFaker;
 
     public function testUpdateRouteMustBeAuthenticated()
     {

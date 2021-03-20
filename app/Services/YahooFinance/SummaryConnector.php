@@ -2,6 +2,6 @@
 
 namespace App\Services\YahooFinance;
 
-class SummaryRequest
+class SummaryConnector
 {
 }

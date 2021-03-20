@@ -10,7 +10,8 @@ use Tests\TestCase;
 
 class StockControllerStoreTest extends TestCase
 {
-    use DateFormatter, WithFaker;
+    use DateFormatter;
+    use WithFaker;
 
     public function testStoreRouteMustBeAuthenticated()
     {

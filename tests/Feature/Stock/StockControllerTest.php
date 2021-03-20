@@ -32,7 +32,7 @@ class StockControllerTest extends TestCase
             'user_id' => $user->id
         ]);
         $stock = factory(Stock::class)->create();
-        $depot->stocks()->attach($stock, $pivot = [
+        $depot->stocks()->attach($stock, [
             'buy_price' => 6.00,
             'buy_currency' => 'Euro',
             'buy_date' => $this->formatDate('05/06/2020'),
@@ -69,7 +69,7 @@ class StockControllerTest extends TestCase
     public function testDestroyRouteMustBeAuthenticated()
     {
         $depot = factory(Depot::class)->create([
-            'user_id' => ($user = factory(User::class)->create())->id
+            'user_id' => (factory(User::class)->create())->id
         ]);
 
         $this->delete(route('stock.destroy', $depot))
@@ -83,7 +83,7 @@ class StockControllerTest extends TestCase
         ]);
 
         $stock = factory(Stock::class)->create();
-        $depot->stocks()->attach($stock, $pivot = [
+        $depot->stocks()->attach($stock, [
             'buy_price' => 6.00,
             'buy_currency' => 'Euro',
             'buy_date' => $this->formatDate('05/06/2020'),

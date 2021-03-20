@@ -4,7 +4,7 @@ namespace App\Services\YahooFinance;
 
 use App\Models\Stock;
 
-interface RequestInterface
+interface ConnectorInterface
 {
     public function callApi(Stock $stock);
 }

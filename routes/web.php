@@ -21,7 +21,8 @@ Auth::routes();
 
 Route::get('/depot/{depotId}/stock/{stockId}/historical', 'YahooFinance\StockHistoricalController@historical');
 Route::get('/stock/{stockId}/summary', 'YahooFinance\StockSummaryController@summary');
-Route::get('/stock/{stockId}/statistics', 'YahooFinance\StockStatisticsController@statistics');
+Route::get('/stock/{stockId}/statistics', 'YahooFinance\StockStatisticsController@statistics')
+    ->name('stock.statistics');
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
 
