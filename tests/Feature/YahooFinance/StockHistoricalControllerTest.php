@@ -108,7 +108,7 @@ class StockHistoricalControllerTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->get(route('stock.statistics', [$depot->id, $stock->id]))
-            ->assertJsonFragment(['symbol' => 'TSLA']);
+            ->get(route('stock.historical', [$depot->id, $stock->id]))
+            ->assertJson(['data' => []]);
     }
 }

@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Http\Controllers\YahooFinance\StockHistoricalController;
 use App\Http\Controllers\YahooFinance\StockStatisticsController;
+use App\Http\Controllers\YahooFinance\StockSummaryController;
 use App\Services\YahooFinance\ConnectorInterface;
 use App\Services\YahooFinance\HistoricalConnector;
 use App\Services\YahooFinance\StatisticsConnector;
+use App\Services\YahooFinance\SummaryConnector;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +30,12 @@ class AppServiceProvider extends ServiceProvider
             ->needs(ConnectorInterface::class)
             ->give(function () {
                 return new HistoricalConnector($this->app->make('GuzzleHttp\Client'));
+            });
+
+        $this->app->when(StockSummaryController::class)
+            ->needs(ConnectorInterface::class)
+            ->give(function () {
+                return new SummaryConnector($this->app->make('GuzzleHttp\Client'));
             });
     }
 
