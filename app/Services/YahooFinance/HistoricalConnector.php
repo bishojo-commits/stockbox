@@ -2,6 +2,7 @@
 
 namespace App\Services\YahooFinance;
 
+use App\Exceptions\InvalidApiCallException;
 use GuzzleHttp\Client;
 use App\Data\YahooFinance;
 use App\Models\Stock;
@@ -22,6 +23,11 @@ class HistoricalConnector implements ConnectorInterface
         $this->client = $client;
     }
 
+    /**
+     * @param Stock $stock
+     * @return mixed
+     * @throws InvalidApiCallException
+     */
     public function callApi(Stock $stock)
     {
         $result = $this->client->get(
@@ -34,6 +40,10 @@ class HistoricalConnector implements ConnectorInterface
             ]
         );
 
-        return json_decode($result->getBody());
+        if ($result->getStatusCode() === 200) {
+            return json_decode($result->getBody());
+        } else {
+            throw new InvalidApiCallException();
+        }
     }
 }

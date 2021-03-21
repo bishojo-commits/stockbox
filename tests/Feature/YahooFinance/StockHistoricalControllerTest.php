@@ -7,6 +7,7 @@ use App\Models\Stock;
 use App\Models\User;
 use App\Traits\DateFormatter;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Routing\Exceptions\UrlGenerationException;
 use Tests\TestCase;
 
 class StockHistoricalControllerTest extends TestCase
@@ -70,6 +71,19 @@ class StockHistoricalControllerTest extends TestCase
                 ]
             ))
             ->assertOk();
+    }
+
+    public function testApiCallUrlGenerationException()
+    {
+        $this->expectException(UrlGenerationException::class);
+
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->get(route(
+                'stock.historical',
+                []
+            ));
     }
 
     public function testApiCallContainsFormattedData()

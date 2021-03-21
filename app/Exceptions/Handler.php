@@ -37,6 +37,9 @@ class Handler extends ExceptionHandler
     public function report(Throwable $exception)
     {
         parent::report($exception);
+
+        if ($exception instanceof InvalidApiCallException) {
+        }
     }
 
     /**
