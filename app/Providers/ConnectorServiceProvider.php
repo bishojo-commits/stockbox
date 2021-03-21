@@ -15,11 +15,11 @@ class ConnectorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Services\YahooFinance\HistoricalConnector', function ($app) {
+        $this->app->bind('App\Services\YahooFinance\ConnectorInterface', function ($app) {
             return new HistoricalConnector($app->make('GuzzleHttp\Client'));
         });
 
-        $this->app->bind('App\Services\YahooFinance\StatisticsConnector', function ($app) {
+        $this->app->bind('App\Services\YahooFinance\ConnectorInterface', function ($app) {
             return new StatisticsConnector($app->make('GuzzleHttp\Client'));
         });
     }

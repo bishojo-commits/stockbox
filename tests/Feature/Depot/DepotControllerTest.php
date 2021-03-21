@@ -26,7 +26,7 @@ class DepotControllerTest extends TestCase
             'user_id' => $user->id
         ]);
         $stock = factory(Stock::class)->create();
-        $depot->stocks()->attach($stock, $pivot = [
+        $depot->stocks()->attach($stock, [
             'buy_price' => 6.00,
             'buy_currency' => 'Euro',
             'buy_date' => $this->formatDate('05/06/2020'),
