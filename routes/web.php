@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/depot/{depotId}/stock/{stockId}/historical', 'YahooFinance\StockHistoricalController@historical');
-Route::get('/stock/{stockId}/summary', 'YahooFinance\StockSummaryController@summary');
+Route::get('/depot/{depotId}/stock/{stockId}/historical', 'YahooFinance\StockHistoricalController@historical')
+    ->name('stock.historical');
+Route::get('/stock/{stockId}/summary', 'YahooFinance\StockSummaryController@summary')
+    ->name('stock.summary');
 Route::get('/stock/{stockId}/statistics', 'YahooFinance\StockStatisticsController@statistics')
     ->name('stock.statistics');
 

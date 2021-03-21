@@ -35,6 +35,6 @@ class StockSummaryController extends Controller
             ]
         );
 
-       return Response::json(json_decode($result->getBody()));
+        return Response::json(json_decode($result->getBody()));
     }
 }
