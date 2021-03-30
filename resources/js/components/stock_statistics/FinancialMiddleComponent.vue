@@ -1,19 +1,19 @@
 <template>
-    <div>
+    <div class="col-md-4">
         <h5>Financial Statistics</h5>
         <div class="text-sm">
             KursCloseVortag
             <span class="text-secondary">
                         {{ formatPrice(statistics.price['regularMarketPreviousClose'].raw) }}
-                    </span><br>
+            </span><br>
             200TageDurchschnitt
             <span class="text-secondary">
                         {{ formatPrice(statistics.summaryDetail['twoHundredDayAverage'].raw) }}
-                    </span><br>
+            </span><br>
             50TageDurchschnitt
             <span class="text-secondary">
                         {{ formatPrice(statistics.summaryDetail['fiftyDayAverage'].raw) }}
-                    </span><br>
+            </span><br>
             GrossProfits <span class="text-secondary">{{ statistics.financialData.grossProfits.fmt }}</span><br>
             CurrentRatio <span class="text-secondary">{{ statistics.financialData.currentRatio.raw }}</span><br>
             ReturnOnAssets <span class="text-secondary">{{ statistics.financialData.returnOnAssets.fmt }}</span><br>

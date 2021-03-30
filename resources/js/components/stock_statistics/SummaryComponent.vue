@@ -31,7 +31,7 @@
         methods: {
             async getSummary () {
                 let response = await axios.get(`/stock/${this.stock.id}/summary`);
-                this.summary = response.data
+                this.summary = response.data.data.summary
                 this.isloading = false
             },
         },

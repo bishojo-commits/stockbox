@@ -9,12 +9,11 @@
 
         <div class="row pt-2 pb-2">
                 <SummaryComponent :stock="stock"></SummaryComponent>
-            <div class="col-md-4">
                 <financial-middle-component :statistics="statistics"
                                             :stock="stock"
-                                            :currencySymbol="currencySymbol"></financial-middle-component>
+                                            :currencySymbol="currencySymbol">
+                </financial-middle-component>
                 <financial-right-component :statistics="statistics" :stock="stock"></financial-right-component>
-            </div>
         </div>
     </div>
 </template>
@@ -46,8 +45,8 @@
         methods: {
             async getStatistics () {
                 let response = await axios.get(`/stock/${this.stock.id}/statistics`)
-                this.statistics = response.data
-                this.currencySymbol = response.data.price.currencySymbol
+                this.statistics = response.data.data.statistics
+                this.currencySymbol = response.data.data.statistics.price.currencySymbol
                 this.isloading = false
             },
 

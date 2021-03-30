@@ -14,20 +14,20 @@ class YahooFinance
     /**
      * Historical
      */
-    public const STOCK_HISTORICAL = '/stock/v3/get-historical-data?region=US&symbol=';
+    public const STOCK_HISTORICAL = '/stock/v3/get-historical-data?region=DE&symbol=';
 
     /**
      * Summary
      */
-    public const STOCK_SUMMARY = '/stock/v2/get-summary?region=US&symbol=';
+    public const STOCK_SUMMARY = '/stock/v2/get-summary?region=DE&symbol=';
 
     /**
      * Statistics
      */
-    public const STOCK_STATISTICS = '/stock/v2/get-statistics?region=US&symbol=';
+    public const STOCK_STATISTICS = '/stock/v2/get-statistics?region=DE&symbol=';
 
     /**
-     * Keys
+     * Env Keys
      */
     public const API_HOST_ENV = 'YAHOO_FINANCE_API_HOST';
 

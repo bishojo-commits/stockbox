@@ -39,7 +39,7 @@
 
             async getHistorical () {
                 let response = await axios.get(`/depot/${this.depot.id}/stock/${this.stock.id}/historical`);
-                this.historical = response.data
+                this.historical = response.data.data.historical
                 this.isloading = false
             },
         },

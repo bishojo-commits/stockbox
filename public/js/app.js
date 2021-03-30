@@ -2263,7 +2263,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context2.sent;
-                _this2.historical = response.data;
+                _this2.historical = response.data.data.historical;
                 _this2.isloading = false;
 
               case 5:
@@ -2326,7 +2326,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -2363,8 +2362,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _this.statistics = response.data;
-                _this.currencySymbol = response.data.price.currencySymbol;
+                _this.statistics = response.data.data.statistics;
+                _this.currencySymbol = response.data.data.statistics.price.currencySymbol;
                 _this.isloading = false;
 
               case 6:
@@ -2927,8 +2926,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     statistics: Object,
@@ -3005,7 +3002,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _this.summary = response.data;
+                _this.summary = response.data.data.summary;
                 _this.isloading = false;
 
               case 5:
@@ -77167,24 +77164,17 @@ var render = function() {
           [
             _c("SummaryComponent", { attrs: { stock: _vm.stock } }),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-4" },
-              [
-                _c("financial-middle-component", {
-                  attrs: {
-                    statistics: _vm.statistics,
-                    stock: _vm.stock,
-                    currencySymbol: _vm.currencySymbol
-                  }
-                }),
-                _vm._v(" "),
-                _c("financial-right-component", {
-                  attrs: { statistics: _vm.statistics, stock: _vm.stock }
-                })
-              ],
-              1
-            )
+            _c("financial-middle-component", {
+              attrs: {
+                statistics: _vm.statistics,
+                stock: _vm.stock,
+                currencySymbol: _vm.currencySymbol
+              }
+            }),
+            _vm._v(" "),
+            _c("financial-right-component", {
+              attrs: { statistics: _vm.statistics, stock: _vm.stock }
+            })
           ],
           1
         )
@@ -77372,7 +77362,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "col-md-4" }, [
     _c("h5", [_vm._v("Financial Statistics")]),
     _vm._v(" "),
     _c("div", { staticClass: "text-sm" }, [
@@ -77464,62 +77454,56 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "col-md-4" }, [
-      _c("h5", [_vm._v("Financial Statistics")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-sm" }, [
-        _vm._v("\n            ProfitMargin "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics.profitMargins.fmt))
-        ]),
-        _c("br"),
-        _vm._v("\n            SharesOutstanding "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(
-            _vm._s(_vm.statistics.defaultKeyStatistics.sharesOutstanding.fmt)
+  return _c("div", { staticClass: "col-md-4" }, [
+    _c("h5", [_vm._v("Financial Statistics")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "text-sm" }, [
+      _vm._v("\n        ProfitMargin "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics.profitMargins.fmt))
+      ]),
+      _c("br"),
+      _vm._v("\n        SharesOutstanding "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(
+          _vm._s(_vm.statistics.defaultKeyStatistics.sharesOutstanding.fmt)
+        )
+      ]),
+      _c("br"),
+      _vm._v("\n        BookValue "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics.bookValue.fmt))
+      ]),
+      _c("br"),
+      _vm._v("\n        PriceToBook "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics.priceToBook.fmt))
+      ]),
+      _c("br"),
+      _vm._v("\n        EnterpriseValue "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics.enterpriseValue.fmt))
+      ]),
+      _c("br"),
+      _vm._v("\n        52WeeksHigh "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(_vm._s(_vm.statistics.summaryDetail["fiftyTwoWeekHigh"].raw))
+      ]),
+      _c("br"),
+      _vm._v("\n        52WeekChange "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics["52WeekChange"].fmt))
+      ]),
+      _c("br"),
+      _vm._v("\n        Börse "),
+      _c("span", { staticClass: "text-secondary" }, [
+        _vm._v(
+          _vm._s(
+            _vm.statistics.quoteData[_vm.stock.ticker_symbol].fullExchangeName
           )
-        ]),
-        _c("br"),
-        _vm._v("\n            BookValue "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics.bookValue.fmt))
-        ]),
-        _c("br"),
-        _vm._v("\n            PriceToBook "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics.priceToBook.fmt))
-        ]),
-        _c("br"),
-        _vm._v("\n            EnterpriseValue "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(
-            _vm._s(_vm.statistics.defaultKeyStatistics.enterpriseValue.fmt)
-          )
-        ]),
-        _c("br"),
-        _vm._v("\n            52WeeksHigh "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(_vm._s(_vm.statistics.summaryDetail["fiftyTwoWeekHigh"].raw))
-        ]),
-        _c("br"),
-        _vm._v("\n            52WeekChange "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(
-            _vm._s(_vm.statistics.defaultKeyStatistics["52WeekChange"].fmt)
-          )
-        ]),
-        _c("br"),
-        _vm._v("\n            Börse "),
-        _c("span", { staticClass: "text-secondary" }, [
-          _vm._v(
-            _vm._s(
-              _vm.statistics.quoteData[_vm.stock.ticker_symbol].fullExchangeName
-            )
-          )
-        ]),
-        _c("br")
-      ])
+        )
+      ]),
+      _c("br")
     ])
   ])
 }
@@ -90529,7 +90513,7 @@ Vue.component('line-chart-component', __webpack_require__(/*! ./charts/LineChart
 Vue.component('pie-chart-component', __webpack_require__(/*! ./charts/PieChartComponent */ "./resources/js/charts/PieChartComponent.vue")["default"]);
 Vue.component('stock-chart-component', __webpack_require__(/*! ./components/StockChartComponent */ "./resources/js/components/StockChartComponent.vue")["default"]);
 Vue.component('statistics-component', __webpack_require__(/*! ./components/StockStatisticsComponent */ "./resources/js/components/StockStatisticsComponent.vue")["default"]);
-Vue.component('summary-component', __webpack_require__(/*! ./components/SummaryComponent */ "./resources/js/components/SummaryComponent.vue")["default"]);
+Vue.component('summary-component', __webpack_require__(/*! ./components/stock_statistics/SummaryComponent */ "./resources/js/components/stock_statistics/SummaryComponent.vue")["default"]);
 Vue.component('stock-show-component', __webpack_require__(/*! ./pages/StockShowComponent */ "./resources/js/pages/StockShowComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -90951,17 +90935,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StockStatisticsComponent_vue_vue_type_template_id_6f4344e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/components/SummaryComponent.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/SummaryComponent.vue ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Applications/MAMP/htdocs/kat_stock_box/stockbox/resources/js/components/SummaryComponent.vue'");
 
 /***/ }),
 
@@ -91466,8 +91439,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/kat_stock_box/stockbox/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/kat_stock_box/stockbox/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/katjagrunwald/PhpStormProjects/stockbox/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/katjagrunwald/PhpStormProjects/stockbox/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

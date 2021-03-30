@@ -26,7 +26,7 @@ Vue.component('line-chart-component', require('./charts/LineChartComponent').def
 Vue.component('pie-chart-component', require('./charts/PieChartComponent').default);
 Vue.component('stock-chart-component', require('./components/StockChartComponent').default);
 Vue.component('statistics-component', require('./components/StockStatisticsComponent').default);
-Vue.component('summary-component', require('./components/SummaryComponent').default);
+Vue.component('summary-component', require('./components/stock_statistics/SummaryComponent').default);
 Vue.component('stock-show-component', require('./pages/StockShowComponent').default);
 
 /**
