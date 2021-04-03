@@ -2,15 +2,15 @@
     <div class="col-md-4">
         <h5>Financial Statistics</h5>
         <div class="text-sm">
-            KursCloseVortag
+            CloseDayBefore
             <span class="text-secondary">
                         {{ formatPrice(statistics.price['regularMarketPreviousClose'].raw) }}
             </span><br>
-            200TageDurchschnitt
+            200DaysAverage
             <span class="text-secondary">
                         {{ formatPrice(statistics.summaryDetail['twoHundredDayAverage'].raw) }}
             </span><br>
-            50TageDurchschnitt
+            50DaysAverage
             <span class="text-secondary">
                         {{ formatPrice(statistics.summaryDetail['fiftyDayAverage'].raw) }}
             </span><br>
@@ -26,13 +26,13 @@
 <script>
     export default {
         props: {
-            currenySymbol: String,
+            currencySymbol: String,
             statistics: Object,
             stock: Object
         },
 
         data: () => ({
-            isloading: true,
+            isLoading: true
         }),
 
         methods: {

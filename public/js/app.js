@@ -2264,7 +2264,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context2.sent;
                 _this2.historical = response.data.data.historical;
-                _this2.isloading = false;
+                _this2.isLoading = false;
 
               case 5:
               case "end":
@@ -2343,7 +2343,7 @@ __webpack_require__.r(__webpack_exports__);
       isLoading: true,
       user: null,
       statistics: null,
-      currencySymbol: null,
+      currencySymbol: '',
       isNegativePrice: true,
       isNegativePercentage: true
     };
@@ -2357,7 +2357,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.getStatistics().then(function (response) {
         _this.statistics = response.data.data.statistics;
-        _this.currencySymbol = response.data.data.statistics.price.currencySymbol;
+        _this.currencySymbol = response.data.data.statistics.price['currencySymbol'];
 
         _this.checkValueOfMarketChange();
 
@@ -2434,7 +2434,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      isloading: true,
+      isLoading: true,
       user: null,
       historical: null,
       data: {
@@ -2504,7 +2504,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.setChartData();
 
-                _this2.isloading = false;
+                _this2.isLoading = false;
 
               case 6:
               case "end":
@@ -2587,7 +2587,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      isloading: true,
+      isLoading: true,
       user: null,
       historical: null,
       data: {
@@ -2657,7 +2657,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.setChartData();
 
-                _this2.isloading = false;
+                _this2.isLoading = false;
 
               case 6:
               case "end":
@@ -2746,11 +2746,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      isloading: true,
+      isLoading: true,
       user: null,
       historical: null,
       data: {
-        labels: ['StockGesamtBuyWorth', 'StockGesamtDepotWorth'],
+        labels: ['StockOverallBuyWorth', 'StockOverallDepotWorth'],
         datasets: [{
           label: 'this.stock.name',
           backgroundColor: 'rgba(246, 109, 155, 0.2)',
@@ -2765,7 +2765,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             ticks: {
               beginAtZero: true,
               callback: function callback(value) {
-                return '€' + value;
+                return 'USD' + value;
               }
             }
           }]
@@ -2816,7 +2816,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.setChartData();
 
-                _this2.isloading = false;
+                _this2.isLoading = false;
 
               case 6:
               case "end":
@@ -2879,13 +2879,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    currenySymbol: String,
+    currencySymbol: String,
     statistics: Object,
     stock: Object
   },
   data: function data() {
     return {
-      isloading: true
+      isLoading: true
     };
   },
   methods: {
@@ -2929,7 +2929,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      isloading: true
+      isLoading: true
     };
   }
 });
@@ -2978,7 +2978,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      isloading: true,
+      isLoading: true,
       user: null,
       summary: null
     };
@@ -2999,7 +2999,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
                 _this.summary = response.data.data.summary;
-                _this.isloading = false;
+                _this.isLoading = false;
 
               case 5:
               case "end":
@@ -77222,7 +77222,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.isloading
+    _vm.isLoading
       ? _c(
           "div",
           [
@@ -77275,7 +77275,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.isloading
+    _vm.isLoading
       ? _c(
           "div",
           [
@@ -77328,7 +77328,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.isloading
+    _vm.isLoading
       ? _c(
           "div",
           [
@@ -77384,7 +77384,7 @@ var render = function() {
     _c("h5", [_vm._v("Financial Statistics")]),
     _vm._v(" "),
     _c("div", { staticClass: "text-sm" }, [
-      _vm._v("\n        KursCloseVortag\n        "),
+      _vm._v("\n        CloseDayBefore\n        "),
       _c("span", { staticClass: "text-secondary" }, [
         _vm._v(
           "\n                    " +
@@ -77397,7 +77397,7 @@ var render = function() {
         )
       ]),
       _c("br"),
-      _vm._v("\n        200TageDurchschnitt\n        "),
+      _vm._v("\n        200DaysAverage\n        "),
       _c("span", { staticClass: "text-secondary" }, [
         _vm._v(
           "\n                    " +
@@ -77410,7 +77410,7 @@ var render = function() {
         )
       ]),
       _c("br"),
-      _vm._v("\n        50TageDurchschnitt\n        "),
+      _vm._v("\n        50DaysAverage\n        "),
       _c("span", { staticClass: "text-secondary" }, [
         _vm._v(
           "\n                    " +
@@ -77513,7 +77513,7 @@ var render = function() {
         _vm._v(_vm._s(_vm.statistics.defaultKeyStatistics["52WeekChange"].fmt))
       ]),
       _c("br"),
-      _vm._v("\n        Börse "),
+      _vm._v("\n        StockExchange "),
       _c("span", { staticClass: "text-secondary" }, [
         _vm._v(
           _vm._s(

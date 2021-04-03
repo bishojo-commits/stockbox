@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isloading">
+        <div v-if="isLoading">
             <vue-simple-spinner
                 size="small"
                 message="Loading Chart"
@@ -32,11 +32,11 @@
         },
 
         data: () => ({
-            isloading: true,
+            isLoading: true,
             user: null,
             historical: null,
             data: {
-                labels: ['StockGesamtBuyWorth', 'StockGesamtDepotWorth'],
+                labels: ['StockOverallBuyWorth', 'StockOverallDepotWorth'],
                 datasets: [
                     {
                         label: 'this.stock.name',
@@ -52,7 +52,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero:true,
-                            callback: value => '€' + value
+                            callback: value => 'USD' + value
                         }
                     }]
                 }
@@ -69,7 +69,7 @@
                 let response = await axios.get(`/depot/${this.depot.id}/stock/${this.stock.id}/historical`);
                 this.historical = response.data
                 this.setChartData()
-                this.isloading = false
+                this.isLoading = false
             },
 
             getDate (timestamp) {

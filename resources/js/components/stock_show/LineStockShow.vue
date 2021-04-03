@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isloading">
+        <div v-if="isLoading">
             <vue-simple-spinner
                 size="huge"
                 message="Loading Chart"
@@ -32,7 +32,7 @@
         },
 
         data: () => ({
-            isloading: true,
+            isLoading: true,
             user: null,
             historical: null,
             data: {
@@ -69,7 +69,7 @@
                 let response = await axios.get(`/depot/${this.depot.id}/stock/${this.stock.id}/historical`);
                 this.historical = response.data.data.historical
                 this.setChartData()
-                this.isloading = false
+                this.isLoading = false
             },
 
             getDate (timestamp) {

@@ -9,7 +9,7 @@
             EnterpriseValue <span class="text-secondary">{{ statistics.defaultKeyStatistics.enterpriseValue.fmt }}</span><br>
             52WeeksHigh <span class="text-secondary">{{ statistics.summaryDetail['fiftyTwoWeekHigh'].raw }}</span><br>
             52WeekChange <span class="text-secondary">{{ statistics.defaultKeyStatistics['52WeekChange'].fmt }}</span><br>
-            Börse <span class="text-secondary">{{ statistics.quoteData[stock.ticker_symbol].fullExchangeName }}</span><br>
+            StockExchange <span class="text-secondary">{{ statistics.quoteData[stock.ticker_symbol].fullExchangeName }}</span><br>
         </div>
     </div>
 </template>
@@ -22,7 +22,7 @@
         },
 
         data: () => ({
-            isloading: true,
+            isLoading: true
         }),
     }
 </script>

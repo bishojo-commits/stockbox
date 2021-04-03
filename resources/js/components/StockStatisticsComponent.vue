@@ -46,7 +46,7 @@
             isLoading: true,
             user: null,
             statistics: null,
-            currencySymbol: null,
+            currencySymbol: '',
             isNegativePrice: true,
             isNegativePercentage: true
         }),
@@ -59,8 +59,7 @@
             setStatistics() {
                 this.getStatistics().then((response) => {
                     this.statistics = response.data.data.statistics
-                    this.currencySymbol = response.data.data.statistics.price.currencySymbol
-
+                    this.currencySymbol = response.data.data.statistics.price['currencySymbol']
                     this.checkValueOfMarketChange()
                     this.isLoading = false
                 })

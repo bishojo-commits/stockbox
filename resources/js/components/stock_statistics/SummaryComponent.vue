@@ -23,7 +23,7 @@
         },
 
         data: () => ({
-            isloading: true,
+            isLoading: true,
             user: null,
             summary: null
         }),
@@ -32,7 +32,7 @@
             async getSummary () {
                 let response = await axios.get(`/stock/${this.stock.id}/summary`);
                 this.summary = response.data.data.summary
-                this.isloading = false
+                this.isLoading = false
             },
         },
 
