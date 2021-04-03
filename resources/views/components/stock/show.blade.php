@@ -16,7 +16,7 @@
     </div>
 
     <div class="pb-2 text-secondary">
-        Currency in {{ $stock->pivot->buy_currency }} |
+        Currency in USD |
         Depot Price {{ $stock->pivot->buy_price }} |
         WKN {{ $stock->wkn_number }}
     </div>
