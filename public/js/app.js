@@ -2293,19 +2293,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _stock_statistics_SummaryComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stock_statistics/SummaryComponent */ "./resources/js/components/stock_statistics/SummaryComponent.vue");
-/* harmony import */ var _stock_statistics_FinancialMiddleComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stock_statistics/FinancialMiddleComponent */ "./resources/js/components/stock_statistics/FinancialMiddleComponent.vue");
-/* harmony import */ var _stock_statistics_FinancialRightComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stock_statistics/FinancialRightComponent */ "./resources/js/components/stock_statistics/FinancialRightComponent.vue");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _stock_statistics_SummaryComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stock_statistics/SummaryComponent */ "./resources/js/components/stock_statistics/SummaryComponent.vue");
+/* harmony import */ var _stock_statistics_FinancialMiddleComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stock_statistics/FinancialMiddleComponent */ "./resources/js/components/stock_statistics/FinancialMiddleComponent.vue");
+/* harmony import */ var _stock_statistics_FinancialRightComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stock_statistics/FinancialRightComponent */ "./resources/js/components/stock_statistics/FinancialRightComponent.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2332,55 +2331,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    SummaryComponent: _stock_statistics_SummaryComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
-    FinancialMiddleComponent: _stock_statistics_FinancialMiddleComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
-    FinancialRightComponent: _stock_statistics_FinancialRightComponent__WEBPACK_IMPORTED_MODULE_4__["default"]
+    SummaryComponent: _stock_statistics_SummaryComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    FinancialMiddleComponent: _stock_statistics_FinancialMiddleComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
+    FinancialRightComponent: _stock_statistics_FinancialRightComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
     stock: Object
   },
   data: function data() {
     return {
-      isloading: true,
+      isLoading: true,
       user: null,
       statistics: null,
-      currencySymbol: null
+      currencySymbol: null,
+      isNegativePrice: true,
+      isNegativePercentage: true
     };
   },
   methods: {
     getStatistics: function getStatistics() {
+      return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/stock/".concat(this.stock.id, "/statistics"));
+    },
+    setStatistics: function setStatistics() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/stock/".concat(_this.stock.id, "/statistics"));
+      this.getStatistics().then(function (response) {
+        _this.statistics = response.data.data.statistics;
+        _this.currencySymbol = response.data.data.statistics.price.currencySymbol;
 
-              case 2:
-                response = _context.sent;
-                _this.statistics = response.data.data.statistics;
-                _this.currencySymbol = response.data.data.statistics.price.currencySymbol;
-                _this.isloading = false;
+        _this.checkValueOfMarketChange();
 
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+        _this.isLoading = false;
+      });
     },
     formatPrice: function formatPrice(number) {
       return number.toFixed(2) + this.currencySymbol;
+    },
+    checkValueOfMarketChange: function checkValueOfMarketChange() {
+      if (this.statistics.price['regularMarketChange'].raw > 0) {
+        this.isNegativePrice = false;
+        this.isNegativePercentage = false;
+      }
     }
   },
-  computed: {},
   mounted: function mounted() {
-    this.getStatistics();
+    this.setStatistics();
   }
 });
 
@@ -2598,7 +2593,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       data: {
         labels: [],
         datasets: [{
-          label: 'this.stock.name',
+          label: '',
           backgroundColor: 'rgba(246, 109, 155, 0.2)',
           data: []
         }]
@@ -2611,7 +2606,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             ticks: {
               beginAtZero: true,
               callback: function callback(value) {
-                return '€' + value;
+                return 'USD ' + value;
               }
             }
           }]
@@ -2684,6 +2679,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this3.data.datasets[0].data.push(element.close);
       });
+      this.data.datasets[0].label = this.stock.name;
       this.data.labels.reverse();
       this.data.datasets[0].data.reverse();
     }
@@ -77124,36 +77120,58 @@ var render = function() {
               "d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2"
           },
           [
-            _c("h3", { staticClass: "text-success" }, [
-              _vm._v(
-                " " +
-                  _vm._s(
-                    _vm.formatPrice(
-                      _vm.statistics.price["regularMarketPrice"].raw
-                    )
-                  ) +
-                  "\n            "
-              ),
-              _c("span", { staticClass: "text-danger text-sm-right" }, [
+            _c("div", { staticClass: "price-wrapper" }, [
+              _c("h3", { staticClass: "text-success" }, [
                 _vm._v(
                   " " +
                     _vm._s(
                       _vm.formatPrice(
-                        _vm.statistics.price["regularMarketChange"].raw
+                        _vm.statistics.price["regularMarketPrice"].raw
                       )
-                    ) +
-                    " "
+                    )
                 )
               ]),
               _vm._v(" "),
-              _c("span", { staticClass: "text-danger text-sm-right" }, [
-                _vm._v(
-                  " " +
-                    _vm._s(
-                      _vm.statistics.price["regularMarketChangePercent"].fmt
-                    )
-                )
-              ])
+              _c(
+                "span",
+                {
+                  staticClass: "text-xs-right",
+                  class: [_vm.isNegativePrice ? "text-danger" : "text-success"]
+                },
+                [
+                  _vm.isNegativePrice
+                    ? _c("span", [_vm._v(" - ")])
+                    : _c("span", [_vm._v(" + ")]),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.formatPrice(
+                          _vm.statistics.price["regularMarketChange"].raw
+                        )
+                      ) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "text-xs-right",
+                  class: [
+                    _vm.isNegativePercentage ? "text-danger" : "text-success"
+                  ]
+                },
+                [
+                  _vm._v(
+                    "\n                (" +
+                      _vm._s(
+                        _vm.statistics.price["regularMarketChangePercent"].fmt
+                      ) +
+                      ")\n            "
+                  )
+                ]
+              )
             ])
           ]
         ),
@@ -77375,7 +77393,7 @@ var render = function() {
                 _vm.statistics.price["regularMarketPreviousClose"].raw
               )
             ) +
-            "\n                "
+            "\n        "
         )
       ]),
       _c("br"),
@@ -77388,7 +77406,7 @@ var render = function() {
                 _vm.statistics.summaryDetail["twoHundredDayAverage"].raw
               )
             ) +
-            "\n                "
+            "\n        "
         )
       ]),
       _c("br"),
@@ -77401,7 +77419,7 @@ var render = function() {
                 _vm.statistics.summaryDetail["fiftyDayAverage"].raw
               )
             ) +
-            "\n                "
+            "\n        "
         )
       ]),
       _c("br"),

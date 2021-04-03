@@ -39,7 +39,7 @@
                 labels: [],
                 datasets: [
                     {
-                        label: 'this.stock.name',
+                        label: '',
                         backgroundColor: 'rgba(246, 109, 155, 0.2)',
                         data: []
                     }
@@ -52,7 +52,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero:true,
-                            callback: value => '€' + value
+                            callback: value => 'USD ' + value
                         }
                     }]
                 }
@@ -83,6 +83,7 @@
                     this.data.datasets[0].data.push(element.close)
                 })
 
+                this.data.datasets[0].label = this.stock.name;
                 this.data.labels.reverse()
                 this.data.datasets[0].data.reverse()
             }

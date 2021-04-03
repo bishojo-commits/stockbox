@@ -1,10 +1,17 @@
 <template>
     <div class="container" v-if="statistics">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
-            <h3 class="text-success"> {{ formatPrice(statistics.price['regularMarketPrice'].raw) }}
-                <span class="text-danger text-sm-right"> {{ formatPrice(statistics.price['regularMarketChange'].raw) }} </span>
-                <span class="text-danger text-sm-right"> {{ statistics.price['regularMarketChangePercent'].fmt }}</span>
-            </h3>
+            <div class="price-wrapper">
+                <h3 class="text-success"> {{ formatPrice(statistics.price['regularMarketPrice'].raw) }}</h3>
+                <span class="text-xs-right" :class="[isNegativePrice ? 'text-danger' : 'text-success']">
+                    <span v-if="isNegativePrice"> - </span>
+                    <span v-else> + </span>
+                    {{ formatPrice(statistics.price['regularMarketChange'].raw) }}
+                </span>
+                <span class="text-xs-right" :class="[isNegativePercentage ?  'text-danger' : 'text-success']">
+                    ({{ statistics.price['regularMarketChangePercent'].fmt }})
+                </span>
+            </div>
         </div>
 
         <div class="row pt-2 pb-2">
@@ -36,29 +43,43 @@
         },
 
         data: () => ({
-            isloading: true,
+            isLoading: true,
             user: null,
             statistics: null,
-            currencySymbol: null
+            currencySymbol: null,
+            isNegativePrice: true,
+            isNegativePercentage: true
         }),
 
         methods: {
-            async getStatistics () {
-                let response = await axios.get(`/stock/${this.stock.id}/statistics`)
-                this.statistics = response.data.data.statistics
-                this.currencySymbol = response.data.data.statistics.price.currencySymbol
-                this.isloading = false
+            getStatistics () {
+                return axios.get(`/stock/${this.stock.id}/statistics`)
+            },
+
+            setStatistics() {
+                this.getStatistics().then((response) => {
+                    this.statistics = response.data.data.statistics
+                    this.currencySymbol = response.data.data.statistics.price.currencySymbol
+
+                    this.checkValueOfMarketChange()
+                    this.isLoading = false
+                })
             },
 
             formatPrice (number) {
                 return number.toFixed(2) + this.currencySymbol
+            },
+
+            checkValueOfMarketChange () {
+                if (this.statistics.price['regularMarketChange'].raw > 0) {
+                    this.isNegativePrice = false;
+                    this.isNegativePercentage = false;
+                }
             }
         },
 
-        computed: {},
-
         mounted() {
-            this.getStatistics()
+            this.setStatistics()
         }
     }
 </script>
