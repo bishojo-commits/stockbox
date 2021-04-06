@@ -5,11 +5,13 @@ namespace Tests\Feature\YahooFinance;
 use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Helpers\TestDataCreator;
 use Tests\TestCase;
 
 class StockStatisticsControllerTest extends TestCase
 {
     use WithFaker;
+    use TestDataCreator;
 
     public function testApiCallMustBeAuthenticated()
     {
@@ -32,11 +34,7 @@ class StockStatisticsControllerTest extends TestCase
     public function testApiCallContainsFormattedData()
     {
         $user = factory(User::class)->create();
-        $stock = factory(Stock::class)->create([
-            'name' => $this->faker->name,
-            'wkn_number' => $this->faker->randomNumber(6),
-            'ticker_symbol' => 'test'
-        ]);
+        $stock = $this->createStock('test');
 
         $this->actingAs($user)
             ->get(route('stock.statistics', $stock->id))

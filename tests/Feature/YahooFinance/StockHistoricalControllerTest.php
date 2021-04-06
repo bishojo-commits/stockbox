@@ -3,17 +3,16 @@
 namespace Tests\Feature\YahooFinance;
 
 use App\Models\Depot;
-use App\Models\Stock;
 use App\Models\User;
-use App\Traits\DateFormatter;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Routing\Exceptions\UrlGenerationException;
+use Tests\Helpers\TestDataCreator;
 use Tests\TestCase;
 
 class StockHistoricalControllerTest extends TestCase
 {
     use WithFaker;
-    use DateFormatter;
+    use TestDataCreator;
 
     public function testApiCallMustBeAuthenticated()
     {
@@ -22,13 +21,11 @@ class StockHistoricalControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $stock = factory(Stock::class)->create();
-        $depot->stocks()->attach($stock, [
-            'buy_price' => 6.00,
-            'buy_currency' => 'Euro',
-            'buy_date' => $this->formatDate('05/06/2020'),
-            'quantity' => 6
-        ]);
+        $stock = $this->createStock('TSLA');
+        $depot->stocks()->attach(
+            $stock,
+            $this->createStockPivotData(6.00, 6)
+        );
 
         $this->get(route(
             'stock.historical',
@@ -47,20 +44,11 @@ class StockHistoricalControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $stock = factory(Stock::class)->create(
-            [
-                'name' => $this->faker->name,
-                'wkn_number' => $this->faker->randomNumber(6),
-                'ticker_symbol' => 'TSLA'
-            ]
+        $stock = $this->createStock('TSLA');
+        $depot->stocks()->attach(
+            $stock,
+            $this->createStockPivotData(6.00, 6)
         );
-
-        $depot->stocks()->attach($stock, [
-            'buy_price' => 6.00,
-            'buy_currency' => 'Euro',
-            'buy_date' => $this->formatDate('05/06/2020'),
-            'quantity' => 6
-        ]);
 
         $this->actingAs($user)
             ->get(route(
@@ -93,19 +81,11 @@ class StockHistoricalControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $stock = factory(Stock::class)->create(
-            [
-                'name' => $this->faker->name,
-                'wkn_number' => $this->faker->randomNumber(6),
-                'ticker_symbol' => 'TSLA'
-            ]
+        $stock = $stock = $this->createStock('TSLA');
+        $depot->stocks()->attach(
+            $stock,
+            $this->createStockPivotData(6.00, 6)
         );
-        $depot->stocks()->attach($stock, [
-            'buy_price' => 6.00,
-            'buy_currency' => 'Euro',
-            'buy_date' => $this->formatDate('05/06/2020'),
-            'quantity' => 6
-        ]);
 
         $this->actingAs($user)
             ->get(route('stock.historical', [$depot->id, $stock->id]))

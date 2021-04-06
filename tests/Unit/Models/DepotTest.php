@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Models;
 
-use Illuminate\Support\Carbon;
+use Tests\Helpers\TestDataCreator;
 use Tests\TestCase;
 use App\Models\Depot;
 use App\Models\User;
@@ -10,6 +10,8 @@ use App\Models\Stock;
 
 class DepotTest extends TestCase
 {
+    use TestDataCreator;
+
     public function testDepotBelongsToUser()
     {
         $depot = factory(Depot::class)->create([
@@ -29,12 +31,7 @@ class DepotTest extends TestCase
 
         $depot->stocks()->attach(
             $stock,
-            [
-                'buy_price' => 6.77,
-                'buy_date' => Carbon::createFromFormat('m/d/Y', '05/20/2020')->format('Y-m-d'),
-                'buy_currency' => 'EUR',
-                'quantity' => 6
-            ]
+            $this->createStockPivotData(6.77, 6)
         );
 
         $this->assertInstanceOf(Stock::class, $depot->stocks->first());

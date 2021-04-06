@@ -7,11 +7,12 @@ use App\Models\Stock;
 use App\Models\User;
 use App\Traits\DateFormatter;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Helpers\TestDataCreator;
 use Tests\TestCase;
 
 class StockControllerUpdateTest extends TestCase
 {
-    use DateFormatter;
+    use TestDataCreator;
     use WithFaker;
 
     public function testUpdateRouteMustBeAuthenticated()
@@ -132,13 +133,12 @@ class StockControllerUpdateTest extends TestCase
         $depot = factory(Depot::class)->create([
             'user_id' => $user->id
         ]);
+
         $stock = factory(Stock::class)->create();
-        $depot->stocks()->attach($stock, $pivot = [
-            'buy_price' => 6.00,
-            'buy_currency' => 'Euro',
-            'buy_date' => $this->formatDate('05/06/2020'),
-            'quantity' => 6
-        ]);
+        $depot->stocks()->attach(
+            $stock,
+            $this->createStockPivotData(6.00, 6)
+        );
 
         $this->actingAs($user)->patch(route('stock.update', [
             'depot' => $depot, 'stock' => $stock

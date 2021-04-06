@@ -42,8 +42,10 @@ class DepotControllerUpdateTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->patch(route('depot.update', $depot),
-                ['depot_title' => ''])
+            ->patch(
+                route('depot.update', $depot),
+                ['depot_title' => '']
+            )
             ->assertSessionHasErrors(['depot_title']);
     }
 
