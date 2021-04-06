@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\YahooFinance\DepotFinancialsController;
 use App\Http\Controllers\YahooFinance\StockHistoricalController;
 use App\Http\Controllers\YahooFinance\StockStatisticsController;
 use App\Http\Controllers\YahooFinance\StockSummaryController;
 use App\Services\YahooFinance\ConnectorInterface;
+use App\Services\YahooFinance\FinancialConnector;
 use App\Services\YahooFinance\HistoricalConnector;
 use App\Services\YahooFinance\StatisticsConnector;
 use App\Services\YahooFinance\SummaryConnector;
@@ -36,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
             ->needs(ConnectorInterface::class)
             ->give(function () {
                 return new SummaryConnector($this->app->make('GuzzleHttp\Client'));
+            });
+
+        $this->app->when(DepotFinancialsController::class)
+            ->needs(ConnectorInterface::class)
+            ->give(function () {
+                return new FinancialConnector($this->app->make('GuzzleHttp\Client'));
             });
     }
 

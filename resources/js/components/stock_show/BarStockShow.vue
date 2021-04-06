@@ -36,11 +36,16 @@
             user: null,
             historical: null,
             data: {
-                labels: ['StockGesamtBuyWorth', 'StockGesamtDepotWorth'],
+                labels: ['Stock comparison then and now'],
                 datasets: [
                     {
-                        label: ['StockGesamtBuyWorth', 'StockGesamtDepotWorth'],
-                        backgroundColor: ['rgba(246, 109, 155, 0.2)', 'rgba(246, 109, 155, 0.4)'],
+                        label: ['Stock value when bought'],
+                        backgroundColor: ['rgba(246, 109, 155, 0.2)'],
+                        data: []
+                    },
+                    {
+                        label: ['Current stock value'],
+                        backgroundColor: ['rgba(246, 109, 155, 0.4)'],
                         data: []
                     },
                 ]
@@ -52,7 +57,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero:true,
-                            callback: value => '€' + value
+                            callback: value => 'USD' + value
                         }
                     }]
                 }
@@ -81,7 +86,7 @@
                 let buyPrice = this.stock.pivot.buy_price * this.stock.pivot.quantity
                 let depotWorth =  this.historical[this.historical.length -1].close * this.stock.pivot.quantity
                 this.data.datasets[0].data.push(buyPrice)
-                this.data.datasets[0].data.push(depotWorth)
+                this.data.datasets[1].data.push(depotWorth)
             },
 
         },

@@ -14,6 +14,7 @@ class StatisticsDataTransformer extends TransformerAbstract
 
     /**
      * StatisticsDataTransformer constructor.
+     * @param Stock $stock
      */
     public function __construct(Stock $stock)
     {

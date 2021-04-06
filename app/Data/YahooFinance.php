@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Data;
-
 
 class YahooFinance
 {
@@ -25,6 +23,11 @@ class YahooFinance
      * Statistics
      */
     public const STOCK_STATISTICS = '/stock/v2/get-statistics?region=DE&symbol=';
+
+    /**
+     * Financials
+     */
+    public const STOCK_FINANCIALS = '/stock/v2/get-financials?region=US&symbol=';
 
     /**
      * Env Keys

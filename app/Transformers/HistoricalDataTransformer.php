@@ -17,6 +17,7 @@ class HistoricalDataTransformer extends TransformerAbstract
 
     /**
      * HistoricalDataTransformer constructor.
+     * @param Stock $stock
      */
     public function __construct(Stock $stock)
     {
@@ -44,6 +45,7 @@ class HistoricalDataTransformer extends TransformerAbstract
     /**
      * A Fractal transformer.
      *
+     * @param $result
      * @return array
      */
     public function transform($result)
@@ -55,6 +57,8 @@ class HistoricalDataTransformer extends TransformerAbstract
 
     /**
      * slice result from stock buy date
+     * @param $result
+     * @return mixed
      */
     protected function proccess($result)
     {

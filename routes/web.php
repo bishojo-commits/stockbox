@@ -26,6 +26,9 @@ Route::get('/stock/{stockId}/summary', 'YahooFinance\StockSummaryController@summ
 Route::get('/stock/{stockId}/statistics', 'YahooFinance\StockStatisticsController@statistics')
     ->name('stock.statistics');
 
+Route::get('/depot/{depotId}/depotTotal', 'YahooFinance\DepotFinancialsController@depotTotal')
+    ->name('depot.depotTotal');
+
 Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
 
 Route::get('/depot', 'Depot\DepotController@index')->name('depot.index');

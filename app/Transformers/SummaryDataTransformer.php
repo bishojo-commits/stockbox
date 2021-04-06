@@ -14,6 +14,7 @@ class SummaryDataTransformer extends TransformerAbstract
 
     /**
      * SummaryDataTransformer constructor.
+     * @param Stock $stock
      */
     public function __construct(Stock $stock)
     {
