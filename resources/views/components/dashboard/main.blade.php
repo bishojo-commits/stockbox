@@ -14,38 +14,14 @@
     </div>
 
     <div id="app">
-        <h3 class="h3 stockbox__heading--h3">Depot Total Statistics Chart</h3>
-        <dashboard-chart-component></dashboard-chart-component>
-    </div>
-
-    <h3 class="h3 stockbox__heading--h3">Depot Total Statistics Data</h3>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
-            </tr>
-            <tr>
-                <td>1,002</td>
-                <td>amet</td>
-                <td>consectetur</td>
-                <td>adipiscing</td>
-                <td>elit</td>
-            </tr>
-            </tbody>
-        </table>
+        <h3 class="h3 stockbox__heading--h3">Depot Total Performance</h3>
+        <dashboard-chart-component
+            @if ((Auth()->user()->depot) != null)
+            :stocks="{{Auth()->user()->depot->stocks}}"
+            :depot="{{ Auth()->user()->depot }}"
+            @else
+            @endif
+            >
+        </dashboard-chart-component>
     </div>
 </main>

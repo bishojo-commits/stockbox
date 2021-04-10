@@ -34,22 +34,22 @@ trait TestDataCreator
 
     protected function createHistoricalDataResult()
     {
-        $date = new \DateTime("05/06/2020");
-        $dateAfter = new \DateTime("06/06/2020");
-        $dateBefore = new \DateTime("03/06/2020");
+        $date = strtotime("05/06/2020");
+        $dateAfter = strtotime("06/06/2020");
+        $dateBefore = strtotime("03/06/2020");
 
         return json_decode(json_encode(
             [
                 "prices" =>
                     [
                         [
-                            "date" => $date->getTimestamp()
+                            "date" => $dateBefore
                         ],
                         [
-                            "date" => $dateBefore->getTimestamp()
+                            "date" => $date
                         ],
                         [
-                            "date" => $dateAfter->getTimestamp()
+                            "date" => $dateAfter
                         ]
                     ]
             ]

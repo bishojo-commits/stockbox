@@ -2010,17 +2010,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _charts_LineChartComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/LineChartComponent */ "./resources/js/charts/LineChartComponent.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _depot_show_LineDepotShow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./depot_show/LineDepotShow */ "./resources/js/components/depot_show/LineDepotShow.vue");
 //
 //
 //
@@ -2030,145 +2020,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    LineChartComponent: _charts_LineChartComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LineDepotShow: _depot_show_LineDepotShow__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  data: function data() {
-    return {
-      user: null,
-      summary: null,
-      historical: null,
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May'],
-        datasets: [{
-          label: 'Depot Kaufwert',
-          backgroundColor: 'rgba(246, 109, 155, 0.2)',
-          data: [5000, 5000, 7700, 7700, 7700]
-        }, {
-          label: 'Depot IstWert',
-          backgroundColor: 'rgba(246, 109, 155, 0.4)',
-          data: [5000, 3500, 6200, 8000, 12000]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              callback: function callback(value) {
-                return '€' + value;
-              }
-            }
-          }]
-        }
-      }
-    };
-  },
-  methods: {
-    getUser: function getUser() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/user');
-
-              case 2:
-                response = _context.sent;
-                _this.user = response.data;
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    getSummary: function getSummary() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/stock-summary');
-
-              case 2:
-                response = _context2.sent;
-                _this2.summary = response.data;
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getHistorical: function getHistorical() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/stock-historical');
-
-              case 2:
-                response = _context3.sent;
-                _this3.historical = response.data;
-
-              case 4:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    }
-  },
-  computed: {
-    getMarketPrice: function getMarketPrice() {
-      var prices = [];
-      this.summary.forEach(function (stock) {
-        prices.push(stock.price.regularMarketPrice);
-      });
-      return prices;
-    },
-    transferDate: function transferDate() {
-      return new Date(this.historical[0].firstTradeDate * 1000);
-    }
-  },
-  mounted: function mounted() {
-    this.getUser();
-    this.getSummary();
-    this.getHistorical();
+  props: {
+    stocks: Array,
+    depot: Object
   }
 });
 
@@ -2220,8 +2079,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      user: null,
-      historical: null
+      user: null
     };
   },
   methods: {
@@ -2248,37 +2106,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
-    },
-    getHistorical: function getHistorical() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/depot/".concat(_this2.depot.id, "/stock/").concat(_this2.stock.id, "/historical"));
-
-              case 2:
-                response = _context2.sent;
-                _this2.historical = response.data.data.historical;
-                _this2.isLoading = false;
-
-              case 5:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
     }
   },
   computed: {},
   mounted: function mounted() {
     this.getUser();
-    this.getHistorical();
   }
 });
 
@@ -2381,6 +2213,177 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/depot_show/LineDepotShow.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/depot_show/LineDepotShow.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _charts_LineChartComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../charts/LineChartComponent */ "./resources/js/charts/LineChartComponent.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    LineChartComponent: _charts_LineChartComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    stocks: Array,
+    depot: Object
+  },
+  data: function data() {
+    return {
+      isLoading: true,
+      historical: [],
+      depotTotalNow: [],
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Depot-Total',
+          backgroundColor: 'rgba(246, 109, 155, 0.2)',
+          data: []
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              callback: function callback(value) {
+                return 'USD ' + value;
+              }
+            }
+          }]
+        }
+      }
+    };
+  },
+  methods: {
+    getHistorical: function getHistorical(depotId, stockId) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                return _context.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/depot/".concat(depotId, "/stock/").concat(stockId, "/historical")));
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    setChartData: function setChartData() {
+      var _this = this;
+
+      this.stocks.forEach(function (stock) {
+        _this.getHistorical(_this.depot.id, stock.id).then(function (response) {
+          _this.historical[stock.id] = response.data.data.historical;
+        })["finally"](function () {
+          //format historical price of each stock with multiplication of stock quantity
+          _this.setNewClosePrice(stock);
+
+          _this.setDepotTotalData();
+
+          _this.setDepotTotalToChart();
+
+          _this.isLoading = false;
+        });
+      });
+    },
+    setNewClosePrice: function setNewClosePrice(stock) {
+      var _this2 = this;
+
+      this.historical.forEach(function (value, index) {
+        _this2.stocks.forEach(function (stock) {
+          if (index === stock.id) {
+            _this2.historical[index].forEach(function (element) {
+              element.close *= stock.pivot.quantity;
+            });
+          }
+        });
+      });
+    },
+    setDepotTotalData: function setDepotTotalData() {
+      var _this3 = this;
+
+      this.historical.forEach(function (value) {
+        value.forEach(function (element) {
+          if (_this3.depotTotalNow.hasOwnProperty(element.date)) {
+            _this3.depotTotalNow[element.date] += element.close;
+          } else {
+            _this3.depotTotalNow[element.date] = element.close;
+          }
+        });
+      });
+    },
+    setDepotTotalToChart: function setDepotTotalToChart() {
+      for (var _i = 0, _Object$entries = Object.entries(this.depotTotalNow); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            key = _Object$entries$_i[0],
+            value = _Object$entries$_i[1];
+
+        this.data.labels.push(this.getDate(key));
+        this.data.datasets[0].data.push(value);
+      }
+    },
+    getDate: function getDate(timestamp) {
+      var date = new Date(timestamp * 1000);
+      return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+    }
+  },
+  mounted: function mounted() {
+    this.setChartData();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stock_show/BarStockShow.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/stock_show/BarStockShow.vue?vue&type=script&lang=js& ***!
@@ -2445,7 +2448,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           data: []
         }, {
           label: ['Current stock value'],
-          backgroundColor: ['rgba(246, 109, 155, 0.4)'],
+          backgroundColor: ['rgba(210, 145, 188, 0.6)'],
           data: []
         }]
       },
@@ -2524,7 +2527,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setChartData: function setChartData() {
       var buyPrice = this.stock.pivot.buy_price * this.stock.pivot.quantity;
-      var depotWorth = this.historical[this.historical.length - 1].close * this.stock.pivot.quantity;
+      var depotWorth = this.historical[0].close * this.stock.pivot.quantity;
       this.data.datasets[0].data.push(buyPrice);
       this.data.datasets[1].data.push(depotWorth);
     }
@@ -2752,13 +2755,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       isLoading: true,
       user: null,
-      historical: null,
+      historical: [],
+      depotTotalNow: [],
+      stockWorth: null,
       data: {
-        labels: ['StockOverallBuyWorth', 'StockOverallDepotWorth'],
+        labels: [],
         datasets: [{
-          label: 'this.stock.name',
-          backgroundColor: 'rgba(246, 109, 155, 0.2)',
-          data: [600, 800]
+          backgroundColor: ['rgba(246, 109, 155, 0.2)', 'rgba(210, 145, 188, 0.6)'],
+          data: []
         }]
       },
       options: {
@@ -2778,23 +2782,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    getUser: function getUser() {
-      var _this = this;
-
+    getHistorical: function getHistorical(depotId, stockId) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/user');
+                return _context.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/depot/".concat(depotId, "/stock/").concat(stockId, "/historical")));
 
-              case 2:
-                response = _context.sent;
-                _this.user = response.data;
-
-              case 4:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -2802,46 +2798,72 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    getHistorical: function getHistorical() {
+    setChartData: function setChartData() {
+      var _this = this;
+
+      this.stocks = this.depot.stocks;
+      console.log(this.stocks);
+      this.stocks.forEach(function (stock) {
+        _this.getHistorical(_this.depot.id, stock.id).then(function (response) {
+          _this.historical[stock.id] = response.data.data.historical;
+        })["finally"](function () {
+          //format historical price of each stock with multiplication of stock quantity
+          _this.setNewClosePrice(stock);
+
+          _this.setDepotTotalData();
+
+          _this.setDepotTotalToChart();
+
+          _this.isLoading = false;
+        });
+      });
+    },
+    setNewClosePrice: function setNewClosePrice(stock) {
       var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/depot/".concat(_this2.depot.id, "/stock/").concat(_this2.stock.id, "/historical"));
-
-              case 2:
-                response = _context2.sent;
-                _this2.historical = response.data;
-
-                _this2.setChartData();
-
-                _this2.isLoading = false;
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
+      this.historical.forEach(function (value, index) {
+        _this2.stocks.forEach(function (stock) {
+          if (index === _this2.stock.id) {
+            _this2.stockWorth = _this2.historical[index][0].close * _this2.stock.pivot.quantity;
           }
-        }, _callee2);
-      }))();
+
+          if (index === stock.id) {
+            _this2.historical[index].forEach(function (element) {
+              element.close *= stock.pivot.quantity;
+            });
+          }
+        });
+      });
+    },
+    setDepotTotalData: function setDepotTotalData() {
+      var _this3 = this;
+
+      this.historical.forEach(function (value) {
+        value.forEach(function (element) {
+          if (_this3.depotTotalNow.hasOwnProperty(element.date)) {
+            _this3.depotTotalNow[element.date] += element.close;
+          } else {
+            _this3.depotTotalNow[element.date] = element.close;
+          }
+        });
+      });
+    },
+    setDepotTotalToChart: function setDepotTotalToChart() {
+      var keys = Object.keys(this.depotTotalNow);
+      var last = keys[keys.length - 1];
+      console.log(this.depotTotalNow[last]);
+      this.data.datasets[0].data.push(this.depotTotalNow[last]);
+      this.data.datasets[0].data.push(this.stockWorth);
+      this.data.labels.push('DepotTotal');
+      this.data.labels.push(this.stock.name);
     },
     getDate: function getDate(timestamp) {
       var date = new Date(timestamp * 1000);
       return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-    },
-    setChartData: function setChartData() {//ToDo get Historical for all Stocks in Depot (write API Endpoint)
-      //sum each (stock historical close * stock.pivot.quantity)
     }
   },
-  computed: {},
   mounted: function mounted() {
-    this.getUser();
-    this.getHistorical();
+    this.setChartData();
   }
 });
 
@@ -77040,21 +77062,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("p", [_vm._v(" " + _vm._s(_vm.user))]),
-      _vm._v(" "),
-      _vm.summary
-        ? _c("p", [
-            _vm._v("\n        " + _vm._s(_vm.getMarketPrice) + "\n    ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.historical
-        ? _c("p", [_vm._v("\n        " + _vm._s(_vm.transferDate) + "\n    ")])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("line-chart-component", {
-        attrs: { data: _vm.data, options: _vm.options }
-      })
+      _c("line-depot-show", { attrs: { stocks: _vm.stocks, depot: _vm.depot } })
     ],
     1
   )
@@ -77210,6 +77218,59 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/depot_show/LineDepotShow.vue?vue&type=template&id=2df06a41&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/depot_show/LineDepotShow.vue?vue&type=template&id=2df06a41& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.isLoading
+      ? _c(
+          "div",
+          [
+            _c("vue-simple-spinner", {
+              attrs: {
+                size: "large",
+                message: "Loading Chart",
+                "line-fg-color": "#957DAD"
+              }
+            })
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.data.labels.length > 0
+      ? _c(
+          "div",
+          { staticClass: "container" },
+          [
+            _c("line-chart-component", {
+              attrs: { data: _vm.data, options: _vm.options }
+            })
+          ],
+          1
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stock_show/BarStockShow.vue?vue&type=template&id=092b9724&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/stock_show/BarStockShow.vue?vue&type=template&id=092b9724& ***!
@@ -77234,7 +77295,7 @@ var render = function() {
               attrs: {
                 size: "small",
                 message: "Loading Chart",
-                "line-fg-color": "#f66d9b"
+                "line-fg-color": "#957DAD"
               }
             })
           ],
@@ -77287,7 +77348,7 @@ var render = function() {
               attrs: {
                 size: "huge",
                 message: "Loading Chart",
-                "line-fg-color": "#f66d9b"
+                "line-fg-color": "#957DAD"
               }
             })
           ],
@@ -77340,7 +77401,7 @@ var render = function() {
               attrs: {
                 size: "small",
                 message: "Loading Chart",
-                "line-fg-color": "#f66d9b"
+                "line-fg-color": "#957DAD"
               }
             })
           ],
@@ -90955,6 +91016,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StockStatisticsComponent_vue_vue_type_template_id_6f4344e2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StockStatisticsComponent_vue_vue_type_template_id_6f4344e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/depot_show/LineDepotShow.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/depot_show/LineDepotShow.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LineDepotShow_vue_vue_type_template_id_2df06a41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LineDepotShow.vue?vue&type=template&id=2df06a41& */ "./resources/js/components/depot_show/LineDepotShow.vue?vue&type=template&id=2df06a41&");
+/* harmony import */ var _LineDepotShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LineDepotShow.vue?vue&type=script&lang=js& */ "./resources/js/components/depot_show/LineDepotShow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LineDepotShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LineDepotShow_vue_vue_type_template_id_2df06a41___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LineDepotShow_vue_vue_type_template_id_2df06a41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/depot_show/LineDepotShow.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/depot_show/LineDepotShow.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/depot_show/LineDepotShow.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LineDepotShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./LineDepotShow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/depot_show/LineDepotShow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LineDepotShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/depot_show/LineDepotShow.vue?vue&type=template&id=2df06a41&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/depot_show/LineDepotShow.vue?vue&type=template&id=2df06a41& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LineDepotShow_vue_vue_type_template_id_2df06a41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./LineDepotShow.vue?vue&type=template&id=2df06a41& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/depot_show/LineDepotShow.vue?vue&type=template&id=2df06a41&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LineDepotShow_vue_vue_type_template_id_2df06a41___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LineDepotShow_vue_vue_type_template_id_2df06a41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

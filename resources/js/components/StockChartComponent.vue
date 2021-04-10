@@ -26,8 +26,7 @@
 
         data () {
             return {
-                user: null,
-                historical: null
+                user: null
             }
         },
 
@@ -35,20 +34,13 @@
             async getUser () {
                 let response = await axios.get('/api/user');
                 this.user = response.data
-            },
-
-            async getHistorical () {
-                let response = await axios.get(`/depot/${this.depot.id}/stock/${this.stock.id}/historical`);
-                this.historical = response.data.data.historical
-                this.isLoading = false
-            },
+            }
         },
 
         computed: {},
 
         mounted() {
             this.getUser()
-            this.getHistorical()
         }
     }
 </script>

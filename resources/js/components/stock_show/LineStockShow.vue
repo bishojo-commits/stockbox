@@ -4,7 +4,7 @@
             <vue-simple-spinner
                 size="huge"
                 message="Loading Chart"
-                line-fg-color="#f66d9b"/>
+                line-fg-color="#957DAD"/>
         </div>
         <div class="container" v-if="data.labels.length > 0">
             <line-chart-component

@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-danger btn-lg btn-block" style="background-color: #f66d9b">
+    <button type="submit" class="btn btn-danger btn-lg btn-block">
         Remove Depot
     </button>
 </form>

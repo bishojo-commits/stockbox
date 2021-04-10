@@ -22,6 +22,18 @@ a {
 }
 
 a:hover {
-    color: #f66d9b;
+    color: #FEC8D8;
     text-decoration: underline;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: rgb(210, 145, 188);
+    border-color: rgb(210, 145, 188);
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color:  rgb(210, 145, 188, 0.8);
+    border-color: rgb(210, 145, 188);
 }

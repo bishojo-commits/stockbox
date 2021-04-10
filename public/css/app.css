@@ -10915,7 +10915,19 @@ a {
 }
 
 a:hover {
-  color: #f66d9b;
+  color: #FEC8D8;
   text-decoration: underline;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #d291bc;
+  border-color: #d291bc;
+}
+
+.btn-danger:hover {
+  color: #fff;
+  background-color: rgba(210, 145, 188, 0.8);
+  border-color: #d291bc;
 }
 

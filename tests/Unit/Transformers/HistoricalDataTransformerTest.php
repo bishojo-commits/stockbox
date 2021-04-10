@@ -29,5 +29,6 @@ class HistoricalDataTransformerTest extends TestCase
         $assertionResult = $transformer->transform($result);
 
         $this->assertArrayHasKey("historical", $assertionResult);
+        $this->assertCount(1, $assertionResult);
     }
 }

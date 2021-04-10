@@ -4,7 +4,7 @@
             <vue-simple-spinner
                 size="small"
                 message="Loading Chart"
-                line-fg-color="#f66d9b"/>
+                line-fg-color="#957DAD"/>
         </div>
         <div class="container" v-if="data.datasets[0].data.length > 0">
             <bar-chart-component
@@ -45,7 +45,7 @@
                     },
                     {
                         label: ['Current stock value'],
-                        backgroundColor: ['rgba(246, 109, 155, 0.4)'],
+                        backgroundColor: ['rgba(210, 145, 188, 0.6)'],
                         data: []
                     },
                 ]
@@ -84,7 +84,7 @@
 
             setChartData () {
                 let buyPrice = this.stock.pivot.buy_price * this.stock.pivot.quantity
-                let depotWorth =  this.historical[this.historical.length -1].close * this.stock.pivot.quantity
+                let depotWorth =  this.historical[0].close * this.stock.pivot.quantity
                 this.data.datasets[0].data.push(buyPrice)
                 this.data.datasets[1].data.push(depotWorth)
             },
