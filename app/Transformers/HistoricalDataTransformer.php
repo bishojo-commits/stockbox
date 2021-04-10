@@ -57,13 +57,13 @@ class HistoricalDataTransformer extends TransformerAbstract
 
     /**
      * slice result from stock buy date
+     *
      * @param $result
      * @return mixed
      */
     protected function proccess($result)
     {
         $timestamp = strtotime($this->stock->pivot->buy_date);
-
         //ToDo implement Array Filter
         foreach ($result->prices as $key => $item) {
             if ($this->formatTimestamp($item->date) === $this->formatTimestamp($timestamp)) {
