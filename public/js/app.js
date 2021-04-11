@@ -2020,14 +2020,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      depotTotal: null,
+      depotStart: null,
+      depotNow: null,
+      depotGrowthNumeric: null,
+      depotGrowthPercent: null
+    };
+  },
   components: {
     LineDepotShow: _depot_show_LineDepotShow__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     stocks: Array,
     depot: Object
+  },
+  methods: {
+    onTotalCalculated: function onTotalCalculated(depotTotal) {
+      this.depotTotal = depotTotal;
+      var keys = Object.keys(this.depotTotal);
+      var first = keys[0];
+      var last = keys[keys.length - 1];
+      this.depotStart = this.depotTotal[first];
+      this.depotNow = this.depotTotal[last];
+      this.depotGrowthNumeric = this.depotNow - this.depotStart;
+      this.depotGrowthPercent = this.depotStart / this.depotNow * 10;
+    },
+    formatPrice: function formatPrice(number) {
+      return number.toFixed(2) + 'USD';
+    },
+    formatPercentage: function formatPercentage(number) {
+      return number.toFixed(2) + '%';
+    }
   }
 });
 
@@ -2130,6 +2179,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stock_statistics_SummaryComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stock_statistics/SummaryComponent */ "./resources/js/components/stock_statistics/SummaryComponent.vue");
 /* harmony import */ var _stock_statistics_FinancialMiddleComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stock_statistics/FinancialMiddleComponent */ "./resources/js/components/stock_statistics/FinancialMiddleComponent.vue");
 /* harmony import */ var _stock_statistics_FinancialRightComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stock_statistics/FinancialRightComponent */ "./resources/js/components/stock_statistics/FinancialRightComponent.vue");
+//
+//
 //
 //
 //
@@ -2321,6 +2372,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setChartData: function setChartData() {
       var _this = this;
 
+      if (this.depot == null) {}
+
       this.stocks.forEach(function (stock) {
         _this.getHistorical(_this.depot.id, stock.id).then(function (response) {
           _this.historical[stock.id] = response.data.data.historical;
@@ -2331,6 +2384,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this.setDepotTotalData();
 
           _this.setDepotTotalToChart();
+
+          _this.$emit('onTotalCalculated', _this.depotTotalNow);
 
           _this.isLoading = false;
         });
@@ -2851,7 +2906,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setDepotTotalToChart: function setDepotTotalToChart() {
       var keys = Object.keys(this.depotTotalNow);
       var last = keys[keys.length - 1];
-      console.log(this.depotTotalNow[last]);
       this.data.datasets[0].data.push(this.depotTotalNow[last]);
       this.data.datasets[0].data.push(this.stockWorth);
       this.data.labels.push('DepotTotal');
@@ -77058,14 +77112,88 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("line-depot-show", { attrs: { stocks: _vm.stocks, depot: _vm.depot } })
-    ],
-    1
-  )
+  return _c("div", [
+    _vm.depotTotal
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2"
+          },
+          [
+            _c("div", { staticClass: "price-wrapper" }, [
+              _c(
+                "h3",
+                {
+                  staticClass: "text-success",
+                  staticStyle: { display: "inline" }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.formatPrice(_vm.depotNow)) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "text-sm-right",
+                  class: [
+                    _vm.depotGrowthNumeric < 0 ? "text-danger" : "text-success"
+                  ]
+                },
+                [
+                  _vm.depotGrowthNumeric < 0
+                    ? _c("span", [_vm._v(" - ")])
+                    : _c("span", [_vm._v(" + ")]),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.formatPrice(_vm.depotGrowthNumeric)) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "text-sm-right",
+                  class: [
+                    _vm.depotGrowthNumeric < 0 ? "text-danger" : "text-success"
+                  ]
+                },
+                [
+                  _vm._v("\n                (\n                "),
+                  _vm.depotGrowthNumeric < 0
+                    ? _c("span", [_vm._v(" - ")])
+                    : _c("span", [_vm._v(" + ")]),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.formatPercentage(_vm.depotGrowthPercent)) +
+                      "\n                )\n            "
+                  )
+                ]
+              )
+            ])
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _c("line-depot-show", {
+          attrs: { stocks: _vm.stocks, depot: _vm.depot },
+          on: { onTotalCalculated: _vm.onTotalCalculated }
+        })
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -77133,21 +77261,29 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "price-wrapper" }, [
-              _c("h3", { staticClass: "text-success" }, [
-                _vm._v(
-                  " " +
-                    _vm._s(
-                      _vm.formatPrice(
-                        _vm.statistics.price["regularMarketPrice"].raw
-                      )
-                    )
-                )
-              ]),
+              _c(
+                "h3",
+                {
+                  staticClass: "text-success",
+                  staticStyle: { display: "inline" }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.formatPrice(
+                          _vm.statistics.price["regularMarketPrice"].raw
+                        )
+                      ) +
+                      "\n            "
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "span",
                 {
-                  staticClass: "text-xs-right",
+                  staticClass: "text-s-right",
                   class: [_vm.isNegativePrice ? "text-danger" : "text-success"]
                 },
                 [
@@ -77169,7 +77305,7 @@ var render = function() {
               _c(
                 "span",
                 {
-                  staticClass: "text-xs-right",
+                  staticClass: "text-s-right",
                   class: [
                     _vm.isNegativePercentage ? "text-danger" : "text-success"
                   ]
@@ -77234,7 +77370,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.isLoading
+    _vm.isLoading && _vm.stocks.length > 0
       ? _c(
           "div",
           [

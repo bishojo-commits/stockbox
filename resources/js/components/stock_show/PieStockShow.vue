@@ -115,7 +115,6 @@
             setDepotTotalToChart() {
                 var keys = Object.keys(this.depotTotalNow);
                 var last = keys[keys.length-1];
-                console.log(this.depotTotalNow[last]);
 
                 this.data.datasets[0].data.push(this.depotTotalNow[last]);
                 this.data.datasets[0].data.push(this.stockWorth);

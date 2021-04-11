@@ -10,7 +10,7 @@
     @endif
 
     <div class="form-row">
-        <div class="form-group col-md-10">
+        <div class="form-group col-md-8">
             <label for="depot_title">Depot title</label>
             <input type="text"
                    class="form-control"
@@ -19,12 +19,13 @@
                    value="{{ $depot->depot_title }}">
         </div>
 
-        <div class="form-group col-md-2">
-            <label for="depot_currency">Depot currency</label>
+        <div class="form-group col-md-4">
+            <label for="depot_currency">Depot currency (USD)</label>
             <input type="text"
                    class="form-control"
                    id="depot_currency"
                    name="depot_currency"
+                   disabled
                    value="{{ $depot->depot_currency }}">
         </div>
     </div>

@@ -2,13 +2,15 @@
     <div class="container" v-if="statistics">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
             <div class="price-wrapper">
-                <h3 class="text-success"> {{ formatPrice(statistics.price['regularMarketPrice'].raw) }}</h3>
-                <span class="text-xs-right" :class="[isNegativePrice ? 'text-danger' : 'text-success']">
+                <h3 class="text-success" style="display: inline">
+                    {{ formatPrice(statistics.price['regularMarketPrice'].raw) }}
+                </h3>
+                <span class="text-s-right" :class="[isNegativePrice ? 'text-danger' : 'text-success']">
                     <span v-if="isNegativePrice"> - </span>
                     <span v-else> + </span>
                     {{ formatPrice(statistics.price['regularMarketChange'].raw) }}
                 </span>
-                <span class="text-xs-right" :class="[isNegativePercentage ?  'text-danger' : 'text-success']">
+                <span class="text-s-right" :class="[isNegativePercentage ?  'text-danger' : 'text-success']">
                     ({{ statistics.price['regularMarketChangePercent'].fmt }})
                 </span>
             </div>

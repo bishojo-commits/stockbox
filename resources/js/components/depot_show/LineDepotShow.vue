@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isLoading">
+        <div v-if="isLoading && stocks.length > 0">
             <vue-simple-spinner
                 size="large"
                 message="Loading Chart"
@@ -64,6 +64,9 @@ export default {
         },
 
         setChartData () {
+            if (this.depot == null) {
+
+            }
             this.stocks.forEach(stock => {
                 this.getHistorical(this.depot.id, stock.id)
                     .then((response) => {
@@ -74,6 +77,8 @@ export default {
                         this.setNewClosePrice(stock);
                         this.setDepotTotalData();
                         this.setDepotTotalToChart();
+
+                        this.$emit('onTotalCalculated', this.depotTotalNow)
 
                         this.isLoading = false;
                 });
@@ -114,7 +119,7 @@ export default {
         getDate (timestamp) {
             let date =  new Date(timestamp * 1000)
             return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-        },
+        }
     },
 
     mounted() {

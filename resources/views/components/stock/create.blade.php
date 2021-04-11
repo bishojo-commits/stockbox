@@ -78,11 +78,13 @@
         </div>
 
         <div class="form-group col">
-            <label for="buy_currency">currency</label>
+            <label for="buy_currency">currency (USD available)</label>
             <input type="text"
+                   value="USD"
                    class="form-control @error('buy_currency') is-invalid @enderror"
                    id="buy_currency"
                    name="buy_currency"
+                   disabled
                    placeholder="buy currency">
 
             @error('buy_currency')

@@ -23,5 +23,8 @@
             @endif
             >
         </dashboard-chart-component>
+        @if ((Auth()->user()->depot) != null && Auth()->user()->depot->stocks == null)
+            <p class="alert alert-class alert-info">No depot statistics available! You have to add stocks to your depot!</p>
+        @endif
     </div>
 </main>
