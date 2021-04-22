@@ -2066,8 +2066,8 @@ __webpack_require__.r(__webpack_exports__);
       var keys = Object.keys(this.depotTotal);
       var first = keys[0];
       var last = keys[keys.length - 1];
-      this.depotStart = this.depotTotal[first];
-      this.depotNow = this.depotTotal[last];
+      this.depotStart = this.depotTotal[last];
+      this.depotNow = this.depotTotal[first];
       this.depotGrowthNumeric = this.depotNow - this.depotStart;
       this.depotGrowthPercent = this.depotStart / this.depotNow * 10;
     },
@@ -2326,8 +2326,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       isLoading: true,
-      historical: [],
-      depotTotalNow: [],
+      historical: {},
+      depotTotalNow: {},
       data: {
         labels: [],
         datasets: [{
@@ -2353,79 +2353,116 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    getHistorical: function getHistorical(depotId, stockId) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                return _context.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/depot/".concat(depotId, "/stock/").concat(stockId, "/historical")));
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
     setChartData: function setChartData() {
       var _this = this;
 
-      if (this.depot == null) {}
+      Promise.all(this.stocks.map( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(stock) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return _this.setHistorical(stock);
 
-      this.stocks.forEach(function (stock) {
-        _this.getHistorical(_this.depot.id, stock.id).then(function (response) {
-          _this.historical[stock.id] = response.data.data.historical;
-        })["finally"](function () {
-          //format historical price of each stock with multiplication of stock quantity
-          _this.setNewClosePrice(stock);
+                case 2:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
 
-          _this.setDepotTotalData();
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }()))["finally"](function () {
+        _this.setNewClosePrice();
 
-          _this.setDepotTotalToChart();
+        _this.setDepotTotalData();
 
-          _this.$emit('onTotalCalculated', _this.depotTotalNow);
-
-          _this.isLoading = false;
-        });
+        _this.setDepotTotalToChart();
       });
     },
-    setNewClosePrice: function setNewClosePrice(stock) {
+    setHistorical: function setHistorical(stock) {
       var _this2 = this;
 
-      this.historical.forEach(function (value, index) {
-        _this2.stocks.forEach(function (stock) {
-          if (index === stock.id) {
-            _this2.historical[index].forEach(function (element) {
-              element.close *= stock.pivot.quantity;
-            });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/depot/".concat(_this2.depot.id, "/stock/").concat(stock.id, "/historical"));
+
+              case 2:
+                response = _context2.sent;
+                _this2.historical[stock.id] = response.data.data.historical;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
           }
-        });
-      });
+        }, _callee2);
+      }))();
     },
-    setDepotTotalData: function setDepotTotalData() {
+    setNewClosePrice: function setNewClosePrice() {
       var _this3 = this;
 
-      this.historical.forEach(function (value) {
-        value.forEach(function (element) {
-          if (_this3.depotTotalNow.hasOwnProperty(element.date)) {
-            _this3.depotTotalNow[element.date] += element.close;
-          } else {
-            _this3.depotTotalNow[element.date] = element.close;
-          }
-        });
-      });
-    },
-    setDepotTotalToChart: function setDepotTotalToChart() {
-      for (var _i = 0, _Object$entries = Object.entries(this.depotTotalNow); _i < _Object$entries.length; _i++) {
+      var _loop = function _loop() {
         var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
             key = _Object$entries$_i[0],
             value = _Object$entries$_i[1];
 
-        this.data.labels.push(this.getDate(key));
+        _this3.stocks.forEach(function (stock) {
+          if (parseInt(key) === stock.id) {
+            value.forEach(function (element) {
+              element.close *= stock.pivot.quantity;
+            });
+          }
+        });
+      };
+
+      for (var _i = 0, _Object$entries = Object.entries(this.historical); _i < _Object$entries.length; _i++) {
+        _loop();
+      }
+    },
+    setDepotTotalData: function setDepotTotalData() {
+      var _this4 = this;
+
+      for (var _i2 = 0, _Object$entries2 = Object.entries(this.historical); _i2 < _Object$entries2.length; _i2++) {
+        var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+            key = _Object$entries2$_i[0],
+            value = _Object$entries2$_i[1];
+
+        value.forEach(function (element) {
+          var date = _this4.getDate(element.date);
+
+          if (_this4.depotTotalNow.hasOwnProperty(date)) {
+            _this4.depotTotalNow[date] += element.close;
+          } else {
+            _this4.depotTotalNow[date] = element.close;
+          }
+        });
+      }
+
+      this.$emit('onTotalCalculated', this.depotTotalNow);
+    },
+    setDepotTotalToChart: function setDepotTotalToChart() {
+      for (var _i3 = 0, _Object$entries3 = Object.entries(this.depotTotalNow); _i3 < _Object$entries3.length; _i3++) {
+        var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i3], 2),
+            key = _Object$entries3$_i[0],
+            value = _Object$entries3$_i[1];
+
+        this.data.labels.push(key);
         this.data.datasets[0].data.push(value);
       }
+
+      this.data.labels.reverse();
+      this.data.datasets[0].data.reverse();
+      this.isLoading = false;
     },
     getDate: function getDate(timestamp) {
       var date = new Date(timestamp * 1000);
@@ -77113,7 +77150,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.depotTotal
+    _vm.depotTotal != null
       ? _c(
           "div",
           {

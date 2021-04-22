@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="depotTotal" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
+        <div v-if="depotTotal != null" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2">
             <div class="price-wrapper">
                 <h3 class="text-success" style="display: inline">
                     {{ formatPrice (depotNow) }}
@@ -60,8 +60,8 @@
                 const first = keys[0];
                 const last = keys[keys.length-1];
 
-                this.depotStart = this.depotTotal[first];
-                this.depotNow = this.depotTotal[last];
+                this.depotStart = this.depotTotal[last];
+                this.depotNow = this.depotTotal[first];
 
                 this.depotGrowthNumeric = this.depotNow - this.depotStart;
                 this.depotGrowthPercent = this.depotStart / this.depotNow * 10;

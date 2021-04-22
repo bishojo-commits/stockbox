@@ -84,7 +84,6 @@
                    class="form-control @error('buy_currency') is-invalid @enderror"
                    id="buy_currency"
                    name="buy_currency"
-                   disabled
                    placeholder="buy currency">
 
             @error('buy_currency')

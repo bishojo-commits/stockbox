@@ -31,8 +31,8 @@ export default {
 
     data: () => ({
         isLoading: true,
-        historical: [],
-        depotTotalNow: [],
+        historical: {},
+        depotTotalNow: {},
         data: {
             labels: [],
             datasets: [
@@ -58,62 +58,58 @@ export default {
     }),
 
     methods: {
-        async getHistorical(depotId, stockId) {
-            return axios.get(`/depot/${depotId}/stock/${stockId}/historical`);
-
-        },
-
-        setChartData () {
-            if (this.depot == null) {
-
-            }
-            this.stocks.forEach(stock => {
-                this.getHistorical(this.depot.id, stock.id)
-                    .then((response) => {
-                        this.historical[stock.id] = (response.data.data.historical);
-                    })
-                    .finally(() => {
-                        //format historical price of each stock with multiplication of stock quantity
-                        this.setNewClosePrice(stock);
-                        this.setDepotTotalData();
-                        this.setDepotTotalToChart();
-
-                        this.$emit('onTotalCalculated', this.depotTotalNow)
-
-                        this.isLoading = false;
-                });
+        setChartData() {
+            Promise.all(this.stocks.map(async (stock) => {
+                await this.setHistorical(stock);
+            })).finally(() => {
+                this.setNewClosePrice();
+                this.setDepotTotalData();
+                this.setDepotTotalToChart();
             });
         },
 
-        setNewClosePrice(stock) {
-            this.historical.forEach((value, index) => {
+        async setHistorical(stock) {
+            const response = await axios.get(`/depot/${this.depot.id}/stock/${stock.id}/historical`);
+            this.historical[stock.id] = response.data.data.historical;
+        },
+
+        setNewClosePrice() {
+            for (const [key, value] of Object.entries(this.historical)) {
                 this.stocks.forEach(stock => {
-                    if (index === stock.id) {
-                        this.historical[index].forEach(element => {
+                    if (parseInt(key) === stock.id) {
+                        value.forEach(element => {
                             element.close *= stock.pivot.quantity;
                         });
                     }
                 });
-            });
+            }
         },
 
         setDepotTotalData() {
-            this.historical.forEach((value) => {
+            for (const [key, value] of Object.entries(this.historical)) {
                 value.forEach((element) => {
-                    if (this.depotTotalNow.hasOwnProperty(element.date)) {
-                        this.depotTotalNow[element.date] += element.close;
+                    const date = this.getDate(element.date);
+                    if (this.depotTotalNow.hasOwnProperty(date)) {
+                        this.depotTotalNow[date] += element.close;
                     } else {
-                        this.depotTotalNow[element.date] = element.close;
+                        this.depotTotalNow[date] = element.close;
                     }
                 });
-            });
+            }
+
+            this.$emit('onTotalCalculated', this.depotTotalNow);
         },
 
         setDepotTotalToChart() {
             for (const [key, value] of Object.entries(this.depotTotalNow)) {
-                this.data.labels.push(this.getDate(key));
+                this.data.labels.push(key);
                 this.data.datasets[0].data.push(value);
             }
+
+            this.data.labels.reverse();
+            this.data.datasets[0].data.reverse();
+
+            this.isLoading = false;
         },
 
         getDate (timestamp) {
