@@ -5,13 +5,11 @@ namespace Tests\Unit\Transformers;
 use App\Models\Depot;
 use App\Models\User;
 use App\Transformers\HistoricalDataTransformer;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tests\Helpers\TestDataCreator;
 
 class HistoricalDataTransformerTest extends TestCase
 {
-    use WithFaker;
     use TestDataCreator;
 
     public function testTransformerSetsResultArray()

@@ -1971,36 +1971,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/PieChartComponent.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/charts/PieChartComponent.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Pie"],
-  props: {
-    data: {
-      type: Object,
-      "default": null
-    },
-    options: {
-      type: Object,
-      "default": null
-    }
-  },
-  mounted: function mounted() {
-    this.renderChart(this.data, this.options);
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DashboardChartComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DashboardChartComponent.vue?vue&type=script&lang=js& ***!
@@ -2095,9 +2065,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _stock_show_LineStockShow__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stock_show/LineStockShow */ "./resources/js/components/stock_show/LineStockShow.vue");
 /* harmony import */ var _stock_show_BarStockShow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stock_show/BarStockShow */ "./resources/js/components/stock_show/BarStockShow.vue");
-/* harmony import */ var _stock_show_PieStockShow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stock_show/PieStockShow */ "./resources/js/components/stock_show/PieStockShow.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2111,16 +2080,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     BarStockShow: _stock_show_BarStockShow__WEBPACK_IMPORTED_MODULE_2__["default"],
-    LineStockShow: _stock_show_LineStockShow__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PieStockShow: _stock_show_PieStockShow__WEBPACK_IMPORTED_MODULE_3__["default"]
+    LineStockShow: _stock_show_LineStockShow__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     depot: Object,
@@ -2142,7 +2108,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/api/user');
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/user');
 
               case 2:
                 response = _context.sent;
@@ -2787,174 +2753,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.getUser();
     this.getHistorical();
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stock_show/PieStockShow.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/stock_show/PieStockShow.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _charts_PieChartComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../charts/PieChartComponent */ "./resources/js/charts/PieChartComponent.vue");
-/* harmony import */ var vue_simple_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-simple-spinner */ "./node_modules/vue-simple-spinner/dist/vue-simple-spinner.js");
-/* harmony import */ var vue_simple_spinner__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_simple_spinner__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    PieChartComponent: _charts_PieChartComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Spinner: vue_simple_spinner__WEBPACK_IMPORTED_MODULE_2___default.a
-  },
-  props: {
-    depot: Object,
-    stock: Object
-  },
-  data: function data() {
-    return {
-      isLoading: true,
-      user: null,
-      historical: [],
-      depotTotalNow: [],
-      stockWorth: null,
-      data: {
-        labels: [],
-        datasets: [{
-          backgroundColor: ['rgba(246, 109, 155, 0.2)', 'rgba(210, 145, 188, 0.6)'],
-          data: []
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              callback: function callback(value) {
-                return 'USD' + value;
-              }
-            }
-          }]
-        }
-      }
-    };
-  },
-  methods: {
-    getHistorical: function getHistorical(depotId, stockId) {
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                return _context.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/depot/".concat(depotId, "/stock/").concat(stockId, "/historical")));
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    setChartData: function setChartData() {
-      var _this = this;
-
-      this.stocks = this.depot.stocks;
-      console.log(this.stocks);
-      this.stocks.forEach(function (stock) {
-        _this.getHistorical(_this.depot.id, stock.id).then(function (response) {
-          _this.historical[stock.id] = response.data.data.historical;
-        })["finally"](function () {
-          //format historical price of each stock with multiplication of stock quantity
-          _this.setNewClosePrice(stock);
-
-          _this.setDepotTotalData();
-
-          _this.setDepotTotalToChart();
-
-          _this.isLoading = false;
-        });
-      });
-    },
-    setNewClosePrice: function setNewClosePrice(stock) {
-      var _this2 = this;
-
-      this.historical.forEach(function (value, index) {
-        _this2.stocks.forEach(function (stock) {
-          if (index === _this2.stock.id) {
-            _this2.stockWorth = _this2.historical[index][0].close * _this2.stock.pivot.quantity;
-          }
-
-          if (index === stock.id) {
-            _this2.historical[index].forEach(function (element) {
-              element.close *= stock.pivot.quantity;
-            });
-          }
-        });
-      });
-    },
-    setDepotTotalData: function setDepotTotalData() {
-      var _this3 = this;
-
-      this.historical.forEach(function (value) {
-        value.forEach(function (element) {
-          if (_this3.depotTotalNow.hasOwnProperty(element.date)) {
-            _this3.depotTotalNow[element.date] += element.close;
-          } else {
-            _this3.depotTotalNow[element.date] = element.close;
-          }
-        });
-      });
-    },
-    setDepotTotalToChart: function setDepotTotalToChart() {
-      var keys = Object.keys(this.depotTotalNow);
-      var last = keys[keys.length - 1];
-      this.data.datasets[0].data.push(this.depotTotalNow[last]);
-      this.data.datasets[0].data.push(this.stockWorth);
-      this.data.labels.push('DepotTotal');
-      this.data.labels.push(this.stock.name);
-    },
-    getDate: function getDate(timestamp) {
-      var date = new Date(timestamp * 1000);
-      return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-    }
-  },
-  mounted: function mounted() {
-    this.setChartData();
   }
 });
 
@@ -77259,9 +77057,7 @@ var render = function() {
     [
       _c("line-stock-show", { attrs: { stock: _vm.stock, depot: _vm.depot } }),
       _vm._v(" "),
-      _c("bar-stock-show", { attrs: { stock: _vm.stock, depot: _vm.depot } }),
-      _vm._v(" "),
-      _c("pie-stock-show", { attrs: { stock: _vm.stock, depot: _vm.depot } })
+      _c("bar-stock-show", { attrs: { stock: _vm.stock, depot: _vm.depot } })
     ],
     1
   )
@@ -77535,59 +77331,6 @@ var render = function() {
           { staticClass: "container" },
           [
             _c("line-chart-component", {
-              attrs: { data: _vm.data, options: _vm.options }
-            })
-          ],
-          1
-        )
-      : _vm._e()
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stock_show/PieStockShow.vue?vue&type=template&id=b00728d6&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/stock_show/PieStockShow.vue?vue&type=template&id=b00728d6& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.isLoading
-      ? _c(
-          "div",
-          [
-            _c("vue-simple-spinner", {
-              attrs: {
-                size: "small",
-                message: "Loading Chart",
-                "line-fg-color": "#957DAD"
-              }
-            })
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.data.labels.length > 0
-      ? _c(
-          "div",
-          { staticClass: "container" },
-          [
-            _c("pie-chart-component", {
               attrs: { data: _vm.data, options: _vm.options }
             })
           ],
@@ -90766,7 +90509,6 @@ Vue.component('dashboard-chart-component', __webpack_require__(/*! ./components/
 Vue.component('financial-middle-component', __webpack_require__(/*! ./components/stock_statistics/FinancialMiddleComponent */ "./resources/js/components/stock_statistics/FinancialMiddleComponent.vue")["default"]);
 Vue.component('financial-right-component', __webpack_require__(/*! ./components/stock_statistics/FinancialRightComponent */ "./resources/js/components/stock_statistics/FinancialRightComponent.vue")["default"]);
 Vue.component('line-chart-component', __webpack_require__(/*! ./charts/LineChartComponent */ "./resources/js/charts/LineChartComponent.vue")["default"]);
-Vue.component('pie-chart-component', __webpack_require__(/*! ./charts/PieChartComponent */ "./resources/js/charts/PieChartComponent.vue")["default"]);
 Vue.component('stock-chart-component', __webpack_require__(/*! ./components/StockChartComponent */ "./resources/js/components/StockChartComponent.vue")["default"]);
 Vue.component('statistics-component', __webpack_require__(/*! ./components/StockStatisticsComponent */ "./resources/js/components/StockStatisticsComponent.vue")["default"]);
 Vue.component('summary-component', __webpack_require__(/*! ./components/stock_statistics/SummaryComponent */ "./resources/js/components/stock_statistics/SummaryComponent.vue")["default"]);
@@ -90934,56 +90676,6 @@ component.options.__file = "resources/js/charts/LineChartComponent.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LineChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./LineChartComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/LineChartComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LineChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/charts/PieChartComponent.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/charts/PieChartComponent.vue ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PieChartComponent.vue?vue&type=script&lang=js& */ "./resources/js/charts/PieChartComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  _PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/charts/PieChartComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/charts/PieChartComponent.vue?vue&type=script&lang=js&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/charts/PieChartComponent.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PieChartComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/PieChartComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieChartComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -91396,75 +91088,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LineStockShow_vue_vue_type_template_id_77c5ebfe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LineStockShow_vue_vue_type_template_id_77c5ebfe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/stock_show/PieStockShow.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/stock_show/PieStockShow.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PieStockShow_vue_vue_type_template_id_b00728d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PieStockShow.vue?vue&type=template&id=b00728d6& */ "./resources/js/components/stock_show/PieStockShow.vue?vue&type=template&id=b00728d6&");
-/* harmony import */ var _PieStockShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PieStockShow.vue?vue&type=script&lang=js& */ "./resources/js/components/stock_show/PieStockShow.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PieStockShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PieStockShow_vue_vue_type_template_id_b00728d6___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PieStockShow_vue_vue_type_template_id_b00728d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/stock_show/PieStockShow.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/stock_show/PieStockShow.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/stock_show/PieStockShow.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieStockShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PieStockShow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stock_show/PieStockShow.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PieStockShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/stock_show/PieStockShow.vue?vue&type=template&id=b00728d6&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/stock_show/PieStockShow.vue?vue&type=template&id=b00728d6& ***!
-  \********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PieStockShow_vue_vue_type_template_id_b00728d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PieStockShow.vue?vue&type=template&id=b00728d6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/stock_show/PieStockShow.vue?vue&type=template&id=b00728d6&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PieStockShow_vue_vue_type_template_id_b00728d6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PieStockShow_vue_vue_type_template_id_b00728d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

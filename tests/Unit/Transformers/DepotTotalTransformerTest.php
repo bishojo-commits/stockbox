@@ -11,7 +11,6 @@ use Tests\TestCase;
 
 class DepotTotalTransformerTest extends TestCase
 {
-    use WithFaker;
     use TestDataCreator;
 
     public function testTransformerCalculatesDepotTotal()

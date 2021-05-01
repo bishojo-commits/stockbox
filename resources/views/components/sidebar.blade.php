@@ -7,11 +7,6 @@
                 </a>
             </li>
             @if(Auth::user()->depot)
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('depot.show', ['depot' => Auth::user()->depot]) }}">
-                        Depot
-                    </a>
-                </li>
                 <ul class="nav">
                     @foreach (Auth::user()->depot->stocks as $stock)
                         <li>

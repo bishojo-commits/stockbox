@@ -4,10 +4,12 @@ namespace Tests\Helpers;
 
 use App\Models\Stock;
 use App\Traits\DateFormatter;
+use Illuminate\Foundation\Testing\WithFaker;
 
 trait TestDataCreator
 {
     use DateFormatter;
+    use WithFaker;
 
     protected function createStock(string $tickerSymbol)
     {
@@ -52,6 +54,16 @@ trait TestDataCreator
                             "date" => $dateAfter
                         ]
                     ]
+            ]
+        ));
+    }
+
+    protected function createEmptyResult()
+    {
+        return json_decode(json_encode(
+            [
+                "data" =>
+                    []
             ]
         ));
     }

@@ -2,21 +2,18 @@
     <div>
         <line-stock-show :stock="stock" :depot="depot"></line-stock-show>
         <bar-stock-show :stock="stock" :depot="depot"></bar-stock-show>
-        <pie-stock-show :stock="stock" :depot="depot"></pie-stock-show>
     </div>
 </template>
 
 <script>
     import LineStockShow from "./stock_show/LineStockShow";
     import BarStockShow from "./stock_show/BarStockShow";
-    import PieStockShow from "./stock_show/PieStockShow";
     import axios from 'axios'
 
     export default {
         components: {
             BarStockShow,
-            LineStockShow,
-            PieStockShow
+            LineStockShow
         },
 
         props: {
