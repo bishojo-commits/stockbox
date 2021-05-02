@@ -43,7 +43,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->when(DepotFinancialsController::class)
             ->needs(ConnectorInterface::class)
             ->give(function () {
-                return new FinancialConnector($this->app->make('GuzzleHttp\Client'));
+                return new FinancialConnector(
+                    $this->app->make('GuzzleHttp\Client'),
+                    $this->app->make('App\Services\Cache\CacheHandler')
+                );
             });
     }
 

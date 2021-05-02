@@ -2,13 +2,11 @@
 
 namespace App\Services\YahooFinance;
 
-use App\Data\CacheKeys;
 use App\Data\YahooFinance;
 use App\Exceptions\InvalidApiCallException;
 use App\Models\Stock;
-use Carbon\Carbon;
+use App\Services\Cache\CacheCrud;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Cache;
 
 class FinancialConnector implements ConnectorInterface
 {
@@ -18,12 +16,19 @@ class FinancialConnector implements ConnectorInterface
     protected $client;
 
     /**
-     * FinancialConnector constructor.
-     * @param $client
+     * @var CacheCrud
      */
-    public function __construct(Client $client)
+    protected $cacheHandler;
+
+    /**
+     * FinancialConnector constructor.
+     * @param Client $client
+     * @param CacheCrud $cacheHandler
+     */
+    public function __construct(Client $client, CacheCrud $cacheHandler)
     {
         $this->client = $client;
+        $this->cacheHandler = $cacheHandler;
     }
 
     /**
@@ -45,24 +50,11 @@ class FinancialConnector implements ConnectorInterface
 
         if ($result->getStatusCode() === 200) {
             $decodedResult = json_decode($result->getBody());
-            $this->addToCache($stock, $decodedResult);
+            $this->cacheHandler->add($stock, $decodedResult);
+
             return $decodedResult;
         } else {
             throw new InvalidApiCallException();
         }
-    }
-
-    protected function getKey(Stock $stock)
-    {
-        return CacheKeys::FINANCIAL . $stock->ticker_symbol;
-    }
-
-    protected function addToCache(Stock $stock, object $result)
-    {
-        Cache::add(
-            $this->getKey($stock),
-            $result,
-            Carbon::now()->addMinutes(10)
-        );
     }
 }
