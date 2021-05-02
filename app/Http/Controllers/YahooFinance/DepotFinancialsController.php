@@ -32,9 +32,12 @@ class DepotFinancialsController extends Controller
         $stocks = Depot::find($depotId)->stocks;
 
         foreach ($stocks as $stock) {
-            if (Cache::has(CacheKeys::FINANCIAL . $stock->ticker_symbol)) {
-                $result[] = Cache::get(CacheKeys::FINANCIAL . $stock->ticker_symbol);
+            $key = CacheKeys::FINANCIAL . $stock->ticker_symbol;
+
+            if (Cache::has($key)) {
+                $result[] = Cache::get($key);
             }
+
             $result[] = $this->financials->callApi($stock);
         }
 
