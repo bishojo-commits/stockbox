@@ -11,7 +11,6 @@ use Tests\TestCase;
 
 class StockHistoricalControllerTest extends TestCase
 {
-    use WithFaker;
     use TestDataCreator;
 
     public function testApiCallMustBeAuthenticated()

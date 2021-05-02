@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class StockStatisticsControllerTest extends TestCase
 {
-    use WithFaker;
     use TestDataCreator;
 
     public function testApiCallMustBeAuthenticated()

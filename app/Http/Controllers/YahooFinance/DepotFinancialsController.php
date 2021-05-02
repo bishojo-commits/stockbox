@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\YahooFinance;
 
+use App\Data\CacheKeys;
 use App\Http\Controllers\Controller;
 use App\Models\Depot;
 use App\Services\YahooFinance\ConnectorInterface;
 use App\Transformers\DepotTotalTransformer;
+use Illuminate\Support\Facades\Cache;
 
 class DepotFinancialsController extends Controller
 {
@@ -30,6 +32,9 @@ class DepotFinancialsController extends Controller
         $stocks = Depot::find($depotId)->stocks;
 
         foreach ($stocks as $stock) {
+            if (Cache::has(CacheKeys::FINANCIAL . $stock->ticker_symbol)) {
+                $result[] = Cache::get(CacheKeys::FINANCIAL . $stock->ticker_symbol);
+            }
             $result[] = $this->financials->callApi($stock);
         }
 
